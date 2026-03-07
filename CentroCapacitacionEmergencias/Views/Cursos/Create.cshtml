@@ -3,36 +3,55 @@
 @model CentroCapacitacionEmergencias.ViewModels.CursoViewModel
 
 
-<div class="mb-3">
-    <label>Título</label>
-    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
-</div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Por favor corrija los siguientes errores:</strong>
+        @Html.ValidationSummary(false)
+    </div>
+}
 
-<div class="mb-3">
-    <label>Código Curso</label>
-    @Html.TextBoxFor(m => m.CodigoCurso, new { @class = "form-control" })
-</div>
 
-<div class="mb-3">
-    <label>Horas Prácticas</label>
-    @Html.TextBoxFor(m => m.HorasPracticas, new { @class = "form-control" })
-</div>
 
-<div class="mb-3">
-    <label>Instructores</label>
-    @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })
-</div>
+@using (Html.BeginForm())
+{
+    <div class="card p-4 shadow-sm">
 
-<div class="mb-3">
-    <label>Cohortes</label>
-    @Html.ListBoxFor(m => m.CohortesSeleccionadas, Model.Cohortes, new { @class = "form-control" })
-</div>
 
-<button type="submit" class="btn btn-primary">
-    Crear Curso
-</button>
 
-<a href="@Url.Action("Index","Home")" class="btn btn-secondary">
-    Cancelar
-</a>
+        <div class="mb-3">
+            <label>Título</label>
+            @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            <label>Código Curso</label>
+            @Html.TextBoxFor(m => m.CodigoCurso, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            <label>Horas Prácticas</label>
+            @Html.TextBoxFor(m => m.HorasPracticas, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            <label>Instructores</label>
+            @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            <label>Cohortes</label>
+            @Html.ListBoxFor(m => m.CohortesSeleccionadas, Model.Cohortes, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Crear Curso
+        </button>
+        <br />
+        <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+            Cancelar
+        </a>
+    </div>
+
+}
 

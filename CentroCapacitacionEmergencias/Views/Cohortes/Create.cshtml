@@ -4,34 +4,45 @@
 
 <h2>Nueva Cohorte</h2>
 
-@Html.ValidationSummary("", new { @class = "alert alert-danger" })
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Por favor corrija los siguientes errores:</strong>
+        @Html.ValidationSummary(false)
+    </div>
+}
 
 @using (Html.BeginForm())
 {
+    <div class="card p-4 shadow-sm">
 
-    <div class="mb-3">
-        <label>Nombre de Cohorte</label>
-        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+        <div class="mb-3">
+            <label>Nombre de Cohorte</label>
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="mb-3">
+            <label>Fecha Inicio</label>
+            @Html.TextBoxFor(m => m.FechaInicio, new { @type = "date", @class = "form-control" })
+        </div>
+
+        <div class="mb-3">
+            <label>Fecha Fin</label>
+            @Html.TextBoxFor(m => m.FechaFin, new { @type = "date", @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Crear Cohorte
+        </button>
+        <br />
+        <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+            Cancelar
+        </a>
+
     </div>
 
-    <div class="mb-3">
-        <label>Fecha Inicio</label>
-        @Html.TextBoxFor(m => m.FechaInicio, new { @type = "date", @class = "form-control" })
-    </div>
+        }
 
-    <div class="mb-3">
-        <label>Fecha Fin</label>
-        @Html.TextBoxFor(m => m.FechaFin, new { @type = "date", @class = "form-control" })
-    </div>
 
-    <button type="submit" class="btn btn-primary">
-        Crear Cohorte
-    </button>
-
-    <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
-        Cancelar
-    </a>
-
-}
 

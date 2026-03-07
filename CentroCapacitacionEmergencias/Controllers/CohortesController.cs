@@ -23,6 +23,7 @@ namespace CentroCapacitacionEmergencias.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Validar que no exista una cohorte con el mismo nombre
                 bool existe = db.Cohortes.Any(c => c.Nombre == model.Nombre);
 
                 if (existe)
@@ -31,6 +32,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                     return View(model);
                 }
 
+                // Validar que la fecha fin sea mayor a la fecha inicio
                 if (model.FechaFin <= model.FechaInicio)
                 {
                     ModelState.AddModelError("", "La fecha fin debe ser mayor a la fecha inicio");
@@ -40,6 +42,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                 db.Cohortes.Add(model);
                 db.SaveChanges();
 
+                //debe redireccionar a otro lugar 
                 return RedirectToAction("Index");
             }
 

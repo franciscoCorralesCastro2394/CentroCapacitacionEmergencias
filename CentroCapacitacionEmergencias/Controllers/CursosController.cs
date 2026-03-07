@@ -55,6 +55,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                     HorasPracticas = model.HorasPracticas
                 };
 
+                // Asignar instructores y cohortes seleccionados
                 curso.Instructores = db.Usuarios
                     .Where(u => model.InstructoresSeleccionados.Contains(u.Id))
                     .ToList();
@@ -66,6 +67,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                 db.Cursos.Add(curso);
                 db.SaveChanges();
 
+                // Redirigir a la lista de cursos o a otra página relevante
                 return RedirectToAction("Index");
             }
 

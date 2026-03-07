@@ -43,7 +43,19 @@
                     Activo = true
                 });
 
-               
+                var InstructorRole = context.Roles.First(r => r.Nombre == "Instructor");
+
+                context.Usuarios.Add(new Usuario
+                {
+                    Nombre = "Instructor",
+                    Apellido = "Sistema",
+                    Correo = "Instructor@centro.com",
+                    PasswordHash = ComputeSha256Hash("1234"),
+                    RolId = InstructorRole.Id,
+                    Activo = true
+                });
+
+
             }
 
             // Aquí podrías agregar datos de ejemplo para Participantes, Cohortes y Cursos si lo deseas
