@@ -10,6 +10,12 @@ namespace CentroCapacitacionEmergencias.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            ViewBag.UserName = Session["UserName"];
             return View();
         }
 

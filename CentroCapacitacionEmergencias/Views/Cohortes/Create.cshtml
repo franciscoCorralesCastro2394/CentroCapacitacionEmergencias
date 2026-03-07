@@ -1,0 +1,37 @@
+﻿
+@model CentroCapacitacionEmergencias.Models.Cohorte
+
+
+<h2>Nueva Cohorte</h2>
+
+@Html.ValidationSummary("", new { @class = "alert alert-danger" })
+
+@using (Html.BeginForm())
+{
+
+    <div class="mb-3">
+        <label>Nombre de Cohorte</label>
+        @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha Inicio</label>
+        @Html.TextBoxFor(m => m.FechaInicio, new { @type = "date", @class = "form-control" })
+    </div>
+
+    <div class="mb-3">
+        <label>Fecha Fin</label>
+        @Html.TextBoxFor(m => m.FechaFin, new { @type = "date", @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Crear Cohorte
+    </button>
+
+    <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+}
+

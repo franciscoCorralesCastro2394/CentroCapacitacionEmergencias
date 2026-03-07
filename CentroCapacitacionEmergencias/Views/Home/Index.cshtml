@@ -2,32 +2,55 @@
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+@{
+    var usuario = @Session["UserName"];
+    var rol = @Session["UserRole"] as string;
+}
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+<a href="/Auth/Logout">Cerrar Sesión</a>
+
+<div class="container mt-5">
+    <div class="card shadow p-4" style="border-radius:15px;">
+
+        <div class="mb-4">
+            <h3 class="fw-bold">Dashboard</h3>
+            <p class="text-muted">Bienvenido al Centro de Capacitación de Emergencias</p>
+            <p class="text-muted">
+                Bienvenido @usuario
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+        </div>
+
+        @if (usuario != null && rol == "Administrador")
+        {
+            <div class="mb-3">
+                <a href="@Url.Action("Create", "Participantes")"
+                   class="btn btn-primary w-100">
+                    Registrar Nuevo Participante
+                </a>
+            </div>
+            <div class="mb-3">
+                <a href="@Url.Action("Create", "Cohortes")"
+                   class="btn btn-primary w-100">
+                    Registrar Nuevo Cohorte
+                </a>
+            </div>
+            <div class="mb-3">
+                <a href="@Url.Action("Create", "Cursos")"
+                   class="btn btn-primary w-100">
+                    Registrar Nuevo Curso
+                </a>
+            </div>
+        }
+
+        @if (usuario != null && rol == "Instructor")
+        {
+            <div class="mb-3">
+                <a href="@Url.Action("Lista", "ListaAnimales")"
+                   class="btn btn-primary w-100">
+                    Modulo Participantes
+                </a>
+            </div>
+        }
+
     </div>
-</main>
+</div>

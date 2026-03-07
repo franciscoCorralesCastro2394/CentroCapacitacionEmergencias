@@ -33,10 +33,16 @@ namespace CentroCapacitacionEmergencias.Models
 
         public DateTime? FechaModificacion { get; set; }
 
+        public int IntentosFallidos { get; set; }
+
+        public DateTime? BloqueadoHasta { get; set; }
+
         // Relación
         public int RolId { get; set; }
 
         [ForeignKey("RolId")]
         public virtual Rol Rol { get; set; }
+
+        public virtual ICollection<Curso> Cursos { get; set; }
     }
 }

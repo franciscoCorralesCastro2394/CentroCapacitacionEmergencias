@@ -1,0 +1,38 @@
+﻿
+
+@model CentroCapacitacionEmergencias.ViewModels.CursoViewModel
+
+
+<div class="mb-3">
+    <label>Título</label>
+    @Html.TextBoxFor(m => m.Titulo, new { @class = "form-control" })
+</div>
+
+<div class="mb-3">
+    <label>Código Curso</label>
+    @Html.TextBoxFor(m => m.CodigoCurso, new { @class = "form-control" })
+</div>
+
+<div class="mb-3">
+    <label>Horas Prácticas</label>
+    @Html.TextBoxFor(m => m.HorasPracticas, new { @class = "form-control" })
+</div>
+
+<div class="mb-3">
+    <label>Instructores</label>
+    @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })
+</div>
+
+<div class="mb-3">
+    <label>Cohortes</label>
+    @Html.ListBoxFor(m => m.CohortesSeleccionadas, Model.Cohortes, new { @class = "form-control" })
+</div>
+
+<button type="submit" class="btn btn-primary">
+    Crear Curso
+</button>
+
+<a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+    Cancelar
+</a>
+

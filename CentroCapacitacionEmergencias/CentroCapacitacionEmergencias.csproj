@@ -128,7 +128,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CohortesController.cs" />
+    <Compile Include="Controllers\CursosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ParticipantesController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,10 +140,34 @@
     <Compile Include="Migrations\202603050317357_InitialCreate.Designer.cs">
       <DependentUpon>202603050317357_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603060419403_AddLoginSecurity.cs" />
+    <Compile Include="Migrations\202603060419403_AddLoginSecurity.Designer.cs">
+      <DependentUpon>202603060419403_AddLoginSecurity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603070225003_CreateParticipante.cs" />
+    <Compile Include="Migrations\202603070225003_CreateParticipante.Designer.cs">
+      <DependentUpon>202603070225003_CreateParticipante.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603070252322_CreateCohorte.cs" />
+    <Compile Include="Migrations\202603070252322_CreateCohorte.Designer.cs">
+      <DependentUpon>202603070252322_CreateCohorte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603070400532_CreateCursos.cs" />
+    <Compile Include="Migrations\202603070400532_CreateCursos.Designer.cs">
+      <DependentUpon>202603070400532_CreateCursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Cohorte.cs" />
+    <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\LoginSecuritySettings.cs" />
+    <Compile Include="Models\Participante.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityConfig\SecurityConfig.cs" />
+    <Compile Include="ViewModels\CursoViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\ParticipanteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -193,10 +220,14 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="securitySettings.json" />
+    <Content Include="Views\Cohortes\Create.cshtml" />
+    <Content Include="Views\Cursos\Create.cshtml" />
+    <Content Include="Views\Participantes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -228,6 +259,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202603050317357_InitialCreate.resx">
       <DependentUpon>202603050317357_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603060419403_AddLoginSecurity.resx">
+      <DependentUpon>202603060419403_AddLoginSecurity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603070225003_CreateParticipante.resx">
+      <DependentUpon>202603070225003_CreateParticipante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603070252322_CreateCohorte.resx">
+      <DependentUpon>202603070252322_CreateCohorte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603070400532_CreateCursos.resx">
+      <DependentUpon>202603070400532_CreateCursos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
