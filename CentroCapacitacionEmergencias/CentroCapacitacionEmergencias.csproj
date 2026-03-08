@@ -156,11 +156,24 @@
     <Compile Include="Migrations\202603070400532_CreateCursos.Designer.cs">
       <DependentUpon>202603070400532_CreateCursos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603080059523_Upt.cs" />
+    <Compile Include="Migrations\202603080059523_Upt.Designer.cs">
+      <DependentUpon>202603080059523_Upt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603080250568_RelacionParticipanteCurso.cs" />
+    <Compile Include="Migrations\202603080250568_RelacionParticipanteCurso.Designer.cs">
+      <DependentUpon>202603080250568_RelacionParticipanteCurso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603080304445_RelacionParticipanteCurso1.cs" />
+    <Compile Include="Migrations\202603080304445_RelacionParticipanteCurso1.Designer.cs">
+      <DependentUpon>202603080304445_RelacionParticipanteCurso1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cohorte.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\LoginSecuritySettings.cs" />
     <Compile Include="Models\Participante.cs" />
+    <Compile Include="Models\ParticipanteCurso.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -225,6 +238,7 @@
     <Content Include="Views\Cohortes\Create.cshtml" />
     <Content Include="Views\Cursos\Create.cshtml" />
     <Content Include="Views\Participantes\Create.cshtml" />
+    <Content Include="Views\Participantes\ListaParticipantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,6 +285,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603070400532_CreateCursos.resx">
       <DependentUpon>202603070400532_CreateCursos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603080059523_Upt.resx">
+      <DependentUpon>202603080059523_Upt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603080250568_RelacionParticipanteCurso.resx">
+      <DependentUpon>202603080250568_RelacionParticipanteCurso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603080304445_RelacionParticipanteCurso1.resx">
+      <DependentUpon>202603080304445_RelacionParticipanteCurso1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

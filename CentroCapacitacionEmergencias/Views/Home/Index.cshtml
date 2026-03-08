@@ -27,6 +27,12 @@
                    class="btn btn-primary w-100">
                     Registrar Nuevo Participante
                 </a>
+               
+                    <a href="@Url.Action("ListaParticipantes", "Participantes")"
+                       class="btn btn btn-info w-100">
+                        Modulo Participantes
+                    </a>
+               
             </div>
             <div class="mb-3">
                 <a href="@Url.Action("Create", "Cohortes")"
@@ -45,7 +51,7 @@
         @if (usuario != null && rol == "Instructor")
         {
             <div class="mb-3">
-                <a href="@Url.Action("Lista", "ListaAnimales")"
+                <a href="@Url.Action("ListaParticipantes", "Participantes")"
                    class="btn btn-primary w-100">
                     Modulo Participantes
                 </a>

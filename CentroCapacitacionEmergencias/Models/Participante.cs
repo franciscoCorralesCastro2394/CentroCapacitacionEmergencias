@@ -52,5 +52,9 @@ namespace CentroCapacitacionEmergencias.Models
         public string DireccionResidencia { get; set; }
 
         public string ContactoEmergencia { get; set; }
+
+        public bool Estado { get; set; }
+
+        public virtual ICollection<Curso> ParticipanteCursos { get; set; }
     }
 }

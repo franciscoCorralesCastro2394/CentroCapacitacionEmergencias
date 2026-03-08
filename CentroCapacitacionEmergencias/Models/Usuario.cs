@@ -43,6 +43,6 @@ namespace CentroCapacitacionEmergencias.Models
         [ForeignKey("RolId")]
         public virtual Rol Rol { get; set; }
 
-        public virtual ICollection<Curso> Cursos { get; set; }
+        
     }
 }

@@ -22,6 +22,8 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
+           
+
             if (!context.Roles.Any())
             {
                 context.Roles.Add(new Rol { Nombre = "Administrador" });
@@ -124,9 +126,9 @@
                                 });
             }
 
-            if (!context.Participantes.Any()) 
+            if (!context.Participantes.Any())
             {
-                  context.Participantes.Add(
+                context.Participantes.Add(
                         new Participante
                         {
                             TipoIdentificacion = "Cedula",
@@ -139,7 +141,8 @@
                             DetalleDireccion = "Barrio Cooperativa",
                             EstadoCivil = "Soltero",
                             Correo = "carlos.mora@email.com",
-                            Telefono = "88887777"
+                            Telefono = "88887777",
+                            Estado = true
                         });
 
                         context.Participantes.Add(
@@ -155,9 +158,35 @@
                             DetalleDireccion = "300m norte iglesia",
                             EstadoCivil = "Soltero",
                             Correo = "daniela.vargas@email.com",
-                            Telefono = "88990011"
+                            Telefono = "88990011",
+                            Estado = true
                         });
             }
+
+            if (!context.ParticipanteCursos.Any()) 
+            {
+                context.ParticipanteCursos.Add(new ParticipanteCurso
+                {
+                    ParticipanteId = 1,
+                    CursoId = 1
+                });
+                context.ParticipanteCursos.Add(new ParticipanteCurso
+                {
+                    ParticipanteId = 1,
+                    CursoId = 2
+                });
+                context.ParticipanteCursos.Add(new ParticipanteCurso
+                {
+                    ParticipanteId = 1,
+                    CursoId = 2
+                });
+                context.ParticipanteCursos.Add(new ParticipanteCurso
+                {
+                    ParticipanteId = 2,
+                    CursoId = 1
+                });
+
+            } 
 
             context.SaveChanges();
         }

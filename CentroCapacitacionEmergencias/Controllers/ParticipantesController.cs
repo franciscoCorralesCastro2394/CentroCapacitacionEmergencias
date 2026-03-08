@@ -22,6 +22,44 @@ namespace CentroCapacitacionEmergencias.Controllers
         }
 
 
+        public ActionResult ListaParticipantes(int? detalleID)
+        {
+            // Obtener solo los participantes activos (Estado = true)
+            var participantes = db.Participantes.
+                Where(p => p.Estado).
+                ToList();
+
+
+
+            if (detalleID != null) 
+            {
+                //var cursos = db.ParticipanteCursos.
+                //Where(pc => pc.ParticipanteId == detalleID).
+                //Select(pc => pc.Curso).
+                //ToList();
+
+                // Si se proporciona un ID de detalle, buscar el participante correspondiente
+                ViewBag.ParticipanteDetalle = db.Participantes.Find(detalleID);
+            }
+
+
+            return View(participantes);
+        }
+
+        public ActionResult CursosParticipante(int id)
+        {
+            var participante = db.Participantes.Find(id);
+
+            var cursos = db.ParticipanteCursos
+                           .Where(pc => pc.ParticipanteId == id)
+                           .Select(pc => pc.Curso)
+                           .ToList();
+
+            ViewBag.Participante = participante;
+
+            return View(cursos);
+        }
+
         [HttpPost]
         public ActionResult Create(ParticipanteViewModel model)
         {
@@ -62,7 +100,8 @@ namespace CentroCapacitacionEmergencias.Controllers
                     Correo = model.Correo,
                     Telefono = model.Telefono,
                     DireccionResidencia = model.DireccionResidencia,
-                    ContactoEmergencia = model.ContactoEmergencia
+                    ContactoEmergencia = model.ContactoEmergencia,
+                    Estado = true
                 };
 
                 db.Participantes.Add(participante);
@@ -73,5 +112,7 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             return View(model);
         }
+
+
     }
 }
