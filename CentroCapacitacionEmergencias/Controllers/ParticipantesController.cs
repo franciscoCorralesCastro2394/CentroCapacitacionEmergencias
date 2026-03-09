@@ -33,11 +33,12 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             if (detalleID != null) 
             {
-                //var cursos = db.ParticipanteCursos.
-                //Where(pc => pc.ParticipanteId == detalleID).
-                //Select(pc => pc.Curso).
-                //ToList();
+                var cursos = db.ParticipanteCursos.
+                Where(pc => pc.ParticipanteId == detalleID).
+                Select(pc => pc.Curso).
+                ToList();
 
+                ViewBag.Cursos = cursos;
                 // Si se proporciona un ID de detalle, buscar el participante correspondiente
                 ViewBag.ParticipanteDetalle = db.Participantes.Find(detalleID);
             }

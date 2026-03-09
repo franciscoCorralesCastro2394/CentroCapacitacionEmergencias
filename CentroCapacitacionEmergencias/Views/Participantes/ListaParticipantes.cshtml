@@ -3,6 +3,7 @@
 
 @{
     var detalle = ViewBag.ParticipanteDetalle as CentroCapacitacionEmergencias.Models.Participante;
+    var cursos = ViewBag.Cursos as List<CentroCapacitacionEmergencias.Models.Curso>;
 }
 
 
@@ -108,6 +109,48 @@
                     <p><strong>Dirección:</strong> @detalle.DetalleDireccion</p>
 
                 </div>
+
+                <hr />
+
+                <h5>Cursos asignados</h5>
+
+                @if (cursos != null && cursos.Any())
+                {
+
+                    <table class="table table-striped">
+
+                        <thead>
+                            <tr>
+                                <th>Curso</th>
+                                <th>Código</th>
+                                <th>Horas Prácticas</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var curso in cursos)
+                            {
+                                <tr>
+                                    <td>@curso.Titulo</td>
+                                    <td>@curso.CodigoCurso</td>
+                                    <td>@curso.HorasPracticas</td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                }
+                else
+                {
+
+                    <div class="alert alert-info">
+                        Este participante no tiene cursos asignados.
+                    </div>
+
+                }
 
             </div>
         </div>
