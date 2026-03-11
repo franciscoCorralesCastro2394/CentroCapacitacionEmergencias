@@ -22,6 +22,41 @@
 
 <table class="table table-striped table-bordered">
 
+    @using (Html.BeginForm("ListaParticipantes", "Participantes", FormMethod.Get))
+    {
+        <div class="row mb-3">
+
+            <div class="col-md-4">
+
+                <input type="text"
+                       name="nombre"
+                       class="form-control"
+                       placeholder="Buscar por nombre"
+                       value="@Request["nombre"]" />
+
+            </div>
+
+            <div class="col-md-4">
+
+                <input type="text"
+                       name="cedula"
+                       class="form-control"
+                       placeholder="Buscar por cédula"
+                       value="@Request["cedula"]" />
+
+            </div>
+
+            <div class="col-md-2">
+
+                <button type="submit" class="btn btn-primary">
+                    Buscar
+                </button>
+
+            </div>
+
+        </div>
+    }
+
     <thead class="table-dark">
         <tr>
             <th>ID</th>
@@ -54,7 +89,7 @@
 
                     @if (usuario != null && rol == "Administrador")
                     {
-                        <a href="@Url.Action("Create","Participantes", new { id = item.Id })"
+                        <a href="@Url.Action("Editar","Participantes", new { id = item.Id })"
                            class="btn btn-sm btn-warning">
                             Editar
                         </a>

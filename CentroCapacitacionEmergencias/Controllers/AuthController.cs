@@ -23,18 +23,18 @@ namespace CentroCapacitacionEmergencias.Controllers
         {
             // Obtener configuración de seguridad (ejemplo, no se usa en este código)
             var config = SecurityConfig.SecurityConfig.GetSettings();
-           
 
-             string hashedPassword = ComputeSha256Hash(model.Password);
-             var userAuth = db.Usuarios
-                             .Include("Rol")
-                             .FirstOrDefault(u => u.Correo == model.Correo
-                                               && u.PasswordHash == hashedPassword
-                                               && u.Activo);
-            var userExist = db.Usuarios
-                             .Include("Rol")
-                             .FirstOrDefault(u => u.Correo == model.Correo
-                                               && u.Activo);
+           
+                string hashedPassword = ComputeSha256Hash(model.Password);
+                var userAuth = db.Usuarios
+                                .Include("Rol")
+                                .FirstOrDefault(u => u.Correo == model.Correo
+                                                  && u.PasswordHash == hashedPassword
+                                                  && u.Activo);
+                var userExist = db.Usuarios
+                                 .Include("Rol")
+                                 .FirstOrDefault(u => u.Correo == model.Correo
+                                                   && u.Activo);
 
             if (userAuth == null && userExist == null)
             {
@@ -79,8 +79,6 @@ namespace CentroCapacitacionEmergencias.Controllers
                 }
 
             }
-          
-
 
             return View(model);
         }

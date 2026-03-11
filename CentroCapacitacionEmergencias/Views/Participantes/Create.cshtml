@@ -15,10 +15,13 @@
     </div>
 }
 
-@using (Html.BeginForm())
+@using (Model.Id != 0 ? Html.BeginForm("EditarParticipante", "Participantes", FormMethod.Post) : Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
 
     <div class="card p-4 shadow-sm">
+
+        @Html.HiddenFor(m => m.Id)
 
         <h5 class="mb-3">Información Personal</h5>
 
@@ -26,16 +29,30 @@
 
             <div class="col-md-4 mb-3">
                 <label>Tipo Identificación</label>
-                @Html.DropDownListFor(m => m.TipoIdentificacion,
-                new SelectList(new[] { "Cedula", "DIMEX", "Pasaporte" }),
-                "Seleccione",
-                new { @class = "form-control" })
+                @if(Model.Id == 0)
+                {
+                    @Html.DropDownListFor(m => m.TipoIdentificacion,
+                    new SelectList(new[] { "Cedula", "DIMEX", "Pasaporte" }),
+                    "Seleccione",
+                    new { @class = "form-control"})
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.TipoIdentificacion, new { @class = "form-control",@readonly = "readonly"   })
+                } 
                 @Html.ValidationMessageFor(m => m.TipoIdentificacion, "", new { @class = "text-danger" })
             </div>
 
             <div class="col-md-4 mb-3">
                 <label>Identificación</label>
-                @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control" })
+                @if(Model.Id == 0)
+                {
+                    @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control" })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.Identificacion, new { @class = "form-control",@readonly = "readonly"   })
+                }
                 @Html.ValidationMessageFor(m => m.Identificacion, "", new { @class = "text-danger" })
             </div>
 
@@ -121,9 +138,19 @@
 
         <hr />
 
-        <button type="submit" class="btn btn-primary">
-            Registrar Participante
-        </button>
+        @if(Model.Id == 0)
+        {
+             <button type="submit" class="btn btn-primary">
+                Registrar Participante
+            </button>
+        }else 
+        {
+            <button type="submit" class="btn btn-warning">
+                    Actuaizar Participante
+             </button>
+        }
+
+       
         <br />
         <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
             Cancelar
@@ -132,4 +159,3 @@
     </div>
 
 }
-
