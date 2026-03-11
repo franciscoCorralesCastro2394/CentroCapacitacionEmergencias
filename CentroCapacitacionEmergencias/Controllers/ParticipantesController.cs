@@ -3,6 +3,7 @@ using CentroCapacitacionEmergencias.Models;
 using CentroCapacitacionEmergencias.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,7 +31,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                 ToList();
 
 
-
+            // Si se proporciona un ID de detalle, buscar el participante correspondiente y sus cursos
             if (detalleID != null) 
             {
                 var cursos = db.ParticipanteCursos.
@@ -56,6 +57,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                            .Select(pc => pc.Curso)
                            .ToList();
 
+            //Pasar el participante y sus cursos a la vista dentro del ViewBag  
             ViewBag.Participante = participante;
 
             return View(cursos);
@@ -66,54 +68,95 @@ namespace CentroCapacitacionEmergencias.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Verificar si el correo ya existe en la base de datos
-                bool correoExiste = db.Participantes
-                    .Any(p => p.Correo == model.Correo);
-
-                // Verificar si la cédula ya existe en la base de datos
-                bool cedulaExiste = db.Participantes
-                    .Any(p => p.Identificacion == model.Identificacion);
-
-                if (correoExiste)
+                // Si el ID es diferente de 0, significa que se está editando un participante existente
+                if (model.Id != 0)
                 {
-                    ModelState.AddModelError("Correo", "Este correo ya está registrado");
-                    return View(model);
+
+                    Participante participanteEditado = new Participante
+                    {
+                        TipoIdentificacion = model.TipoIdentificacion,
+                        Identificacion = model.Identificacion,
+                        NombreCompleto = model.NombreCompleto,
+                        FechaNacimiento = model.FechaNacimiento,
+                        Provincia = model.Provincia,
+                        Canton = model.Canton,
+                        Distrito = model.Distrito,
+                        DetalleDireccion = model.DetalleDireccion,
+                        EstadoCivil = model.EstadoCivil,
+                        Correo = model.Correo,
+                        Telefono = model.Telefono,
+                        DireccionResidencia = model.DireccionResidencia,
+                        ContactoEmergencia = model.ContactoEmergencia,
+                        Estado = true
+                    };
+
+                    db.Entry(participanteEditado).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("ListaParticipantes", "Participantes");
                 }
-
-                if (cedulaExiste)
+                else 
                 {
-                    ModelState.AddModelError("Identificacion", "Esta identificación ya existe");
-                    return View(model);
-                }
 
-                // Crear un nuevo participante a partir del modelo de vista
-                Participante participante = new Participante
-                {
-                    TipoIdentificacion = model.TipoIdentificacion,
-                    Identificacion = model.Identificacion,
-                    NombreCompleto = model.NombreCompleto,
-                    FechaNacimiento = model.FechaNacimiento,
-                    Provincia = model.Provincia,
-                    Canton = model.Canton,
-                    Distrito = model.Distrito,
-                    DetalleDireccion = model.DetalleDireccion,
-                    EstadoCivil = model.EstadoCivil,
-                    Correo = model.Correo,
-                    Telefono = model.Telefono,
-                    DireccionResidencia = model.DireccionResidencia,
-                    ContactoEmergencia = model.ContactoEmergencia,
-                    Estado = true
-                };
+                    // Verificar si el correo ya existe en la base de datos
+                    bool correoExiste = db.Participantes
+                        .Any(p => p.Correo == model.Correo);
 
-                db.Participantes.Add(participante);
-                db.SaveChanges();
+                    // Verificar si la cédula ya existe en la base de datos
+                    bool cedulaExiste = db.Participantes
+                        .Any(p => p.Identificacion == model.Identificacion);
 
-                return RedirectToAction("Index");
+                    if (correoExiste)
+                    {
+                        ModelState.AddModelError("Correo", "Este correo ya está registrado");
+                        return View(model);
+                    }
+
+                    if (cedulaExiste)
+                    {
+                        ModelState.AddModelError("Identificacion", "Esta identificación ya existe");
+                        return View(model);
+                    }
+
+                    // Crear un nuevo participante a partir del modelo de vista
+                    Participante participante = new Participante
+                    {
+                        TipoIdentificacion = model.TipoIdentificacion,
+                        Identificacion = model.Identificacion,
+                        NombreCompleto = model.NombreCompleto,
+                        FechaNacimiento = model.FechaNacimiento,
+                        Provincia = model.Provincia,
+                        Canton = model.Canton,
+                        Distrito = model.Distrito,
+                        DetalleDireccion = model.DetalleDireccion,
+                        EstadoCivil = model.EstadoCivil,
+                        Correo = model.Correo,
+                        Telefono = model.Telefono,
+                        DireccionResidencia = model.DireccionResidencia,
+                        ContactoEmergencia = model.ContactoEmergencia,
+                        Estado = true
+                    };
+
+                    db.Participantes.Add(participante);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+
+                } 
+
+              
             }
 
             return View(model);
         }
 
 
+        public ActionResult Editar(int id)
+        {
+            var participante = db.Participantes.Find(id);
+
+            //Renvia a la vista de creación con los datos del participante para editar
+            return View("Create", participante);
+        }
     }
 }

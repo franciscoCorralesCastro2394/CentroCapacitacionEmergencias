@@ -54,7 +54,7 @@
 
                     @if (usuario != null && rol == "Administrador")
                     {
-                        <a href="@Url.Action("Edit","Participantes", new { id = item.Id })"
+                        <a href="@Url.Action("Create","Participantes", new { id = item.Id })"
                            class="btn btn-sm btn-warning">
                             Editar
                         </a>

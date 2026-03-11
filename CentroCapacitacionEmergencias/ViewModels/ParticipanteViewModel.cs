@@ -7,6 +7,7 @@ namespace CentroCapacitacionEmergencias.ViewModels
 {
     public class ParticipanteViewModel
     {
+        public int Id { get; set; } = 0;
         public string TipoIdentificacion { get; set; }
         public string Identificacion { get; set; }
 
@@ -31,5 +32,8 @@ namespace CentroCapacitacionEmergencias.ViewModels
         public string DireccionResidencia { get; set; }
 
         public string ContactoEmergencia { get; set; }
+
+
+
     }
 }
