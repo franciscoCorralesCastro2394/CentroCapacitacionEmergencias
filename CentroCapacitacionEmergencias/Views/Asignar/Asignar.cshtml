@@ -1,0 +1,72 @@
+﻿
+@model  CentroCapacitacionEmergencias.ViewModels.AsignarCursoCohorte
+
+
+
+@*@if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <strong>Por favor corrija los siguientes errores:</strong>
+            @Html.ValidationSummary(false)
+        </div>
+    }*@
+<h3>Asignar Curso y Cohorte</h3>
+<div class="card">
+
+    <div class="card-body">
+
+        <p><strong>Participante:</strong> @Model.NombreParticipante</p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(m => m.ParticipanteId)
+
+            <div class="form-group mb-3">
+
+                <label>Cursos</label>
+
+                <div class="form-group">
+
+                    @foreach (var curso in Model.Cursos)
+                    {
+                        <div class="form-check">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="CursosSeleccionados"
+                                   value="@curso.Value" />
+
+                            <label class="form-check-label">
+                                @curso.Text
+                            </label>
+
+                        </div>
+                    }
+
+                </div>
+
+                <div class="form-group mb-3">
+
+                    @Html.LabelFor(m => m.CohorteId, "Cohorte")
+
+                    @Html.DropDownListFor(
+                        m => m.CohorteId,
+                        Model.Cohortes,
+                        "Seleccione una cohorte",
+                        new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CohorteId, "", new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Asignar
+                </button>
+
+                <a href="@Url.Action("ListaParticipantes")" class="btn btn-secondary">
+                    Cancelar
+                </a>
+
+            </div>
+
+        }
+    </div>
+</div>

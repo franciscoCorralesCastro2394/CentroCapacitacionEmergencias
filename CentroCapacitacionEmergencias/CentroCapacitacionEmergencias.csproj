@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AsignarController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CohortesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
@@ -168,16 +169,34 @@
     <Compile Include="Migrations\202603080304445_RelacionParticipanteCurso1.Designer.cs">
       <DependentUpon>202603080304445_RelacionParticipanteCurso1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603120552557_RelacionCohortePart.cs" />
+    <Compile Include="Migrations\202603120552557_RelacionCohortePart.Designer.cs">
+      <DependentUpon>202603120552557_RelacionCohortePart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603120605096_RelacionCohortePart1.cs" />
+    <Compile Include="Migrations\202603120605096_RelacionCohortePart1.Designer.cs">
+      <DependentUpon>202603120605096_RelacionCohortePart1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603120606368_RelacionCohortePart2.cs" />
+    <Compile Include="Migrations\202603120606368_RelacionCohortePart2.Designer.cs">
+      <DependentUpon>202603120606368_RelacionCohortePart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603120607332_RelacionPartiCohorte.cs" />
+    <Compile Include="Migrations\202603120607332_RelacionPartiCohorte.Designer.cs">
+      <DependentUpon>202603120607332_RelacionPartiCohorte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cohorte.cs" />
     <Compile Include="Models\Curso.cs" />
     <Compile Include="Models\LoginSecuritySettings.cs" />
     <Compile Include="Models\Participante.cs" />
+    <Compile Include="Models\ParticipanteCohorte.cs" />
     <Compile Include="Models\ParticipanteCurso.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfig\SecurityConfig.cs" />
+    <Compile Include="ViewModels\AsignarCursoCohorte.cs" />
     <Compile Include="ViewModels\CursoViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ParticipanteViewModel.cs" />
@@ -239,6 +258,7 @@
     <Content Include="Views\Cursos\Create.cshtml" />
     <Content Include="Views\Participantes\Create.cshtml" />
     <Content Include="Views\Participantes\ListaParticipantes.cshtml" />
+    <Content Include="Views\Asignar\Asignar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -294,6 +314,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603080304445_RelacionParticipanteCurso1.resx">
       <DependentUpon>202603080304445_RelacionParticipanteCurso1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603120552557_RelacionCohortePart.resx">
+      <DependentUpon>202603120552557_RelacionCohortePart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603120605096_RelacionCohortePart1.resx">
+      <DependentUpon>202603120605096_RelacionCohortePart1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603120606368_RelacionCohortePart2.resx">
+      <DependentUpon>202603120606368_RelacionCohortePart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603120607332_RelacionPartiCohorte.resx">
+      <DependentUpon>202603120607332_RelacionPartiCohorte.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

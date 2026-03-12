@@ -19,7 +19,8 @@ namespace CentroCapacitacionEmergencias.Data
         public DbSet<Participante> Participantes { get; set; }
         public DbSet<Cohorte> Cohortes { get; set; }
         public DbSet<Curso> Cursos { get; set; }
-
         public DbSet<ParticipanteCurso> ParticipanteCursos { get; set; }
+
+        public DbSet<ParticipanteCohorte> ParticipanteCohortes { get; set; }
     }
 }

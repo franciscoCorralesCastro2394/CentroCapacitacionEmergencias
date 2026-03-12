@@ -168,25 +168,40 @@
                 context.ParticipanteCursos.Add(new ParticipanteCurso
                 {
                     ParticipanteId = 1,
-                    CursoId = 1
+                    CursoId = 1,
+                    CohorteId = 1
                 });
                 context.ParticipanteCursos.Add(new ParticipanteCurso
                 {
                     ParticipanteId = 1,
-                    CursoId = 2
+                    CursoId = 2,
+                    CohorteId = 1
                 });
                 context.ParticipanteCursos.Add(new ParticipanteCurso
                 {
                     ParticipanteId = 1,
-                    CursoId = 2
+                    CursoId = 2,
+                    CohorteId = 1
                 });
                 context.ParticipanteCursos.Add(new ParticipanteCurso
                 {
                     ParticipanteId = 2,
-                    CursoId = 1
+                    CursoId = 1,
+                    CohorteId = 1
                 });
 
-            } 
+            }
+
+            if (!context.ParticipanteCohortes.Any())
+            {
+                context.ParticipanteCohortes.Add(
+                    new ParticipanteCohorte
+                    {
+                        CohorteID = 1,
+                        ParticipanteId = 1
+                    }
+                    );
+            }
 
             context.SaveChanges();
         }

@@ -131,8 +131,9 @@ namespace CentroCapacitacionEmergencias.Controllers
                 db.Participantes.Add(participante);
                 db.SaveChanges();
 
-                TempData["Mensaje"] = "Participante creado correctamente.";
-                return RedirectToAction("Index");
+                //TempData["Mensaje"] = "Participante creado correctamente.";
+                return RedirectToAction("Asignar","Asignar", new { id = participante.Id});
+
             }
 
             return View(model);
@@ -207,7 +208,6 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             return View("Create", model);
         }
-
 
         public ActionResult Delete(int id)
         {
