@@ -55,10 +55,20 @@ namespace CentroCapacitacionEmergencias.Controllers
             // Si se proporciona un ID de detalle, buscar el participante correspondiente y sus cursos
             if (detalleID != null)
             {
+                //obtiene los cursos de un participante
                 var cursos = db.ParticipanteCursos.
                 Where(pc => pc.ParticipanteId == detalleID).
                 Select(pc => pc.Curso).
                 ToList();
+
+                //obtiene los cohortes de un participante
+                var cohortes = db.ParticipanteCohortes.
+                Where(pc => pc.ParticipanteId == detalleID).
+                Select(pc => pc.Cohorte).
+                ToList();
+
+
+                ViewBag.Cohortes = cohortes;
 
                 ViewBag.Cursos = cursos;
                 // Si se proporciona un ID de detalle, buscar el participante correspondiente
@@ -218,6 +228,40 @@ namespace CentroCapacitacionEmergencias.Controllers
                 participante.Estado = false;
                 db.SaveChanges();
             }
+            return RedirectToAction("ListaParticipantes");
+        }
+
+        public ActionResult RemoverCohorte(int idCohorte, int idParticipante) 
+        {
+            //
+            var relaciones = db.ParticipanteCohortes
+                            .Where(pc => pc.ParticipanteId == idParticipante && pc.CohorteID == idCohorte)
+                            .ToList();
+
+            if (relaciones != null) 
+            {
+                db.ParticipanteCohortes.RemoveRange(relaciones);
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ListaParticipantes");
+        }
+
+        public ActionResult RemoverCurso(int idCurso, int idParticipante)
+        {
+            //
+            var relaciones = db.ParticipanteCursos
+                            .Where(pc => pc.ParticipanteId == idParticipante && pc.CursoId == idCurso)
+                            .ToList();
+
+            if (relaciones != null)
+            {
+                db.ParticipanteCursos.RemoveRange(relaciones);
+
+                db.SaveChanges();
+            }
+
             return RedirectToAction("ListaParticipantes");
         }
     }

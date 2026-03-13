@@ -4,6 +4,7 @@
 @{
     var detalle = ViewBag.ParticipanteDetalle as CentroCapacitacionEmergencias.Models.Participante;
     var cursos = ViewBag.Cursos as List<CentroCapacitacionEmergencias.Models.Curso>;
+    var cohortes = ViewBag.Cohortes as List<CentroCapacitacionEmergencias.Models.Cohorte>;
 }
 
 
@@ -143,49 +144,122 @@
 
                     <p><strong>Dirección:</strong> @detalle.DetalleDireccion</p>
 
+
+                    <hr />
+                    @if (cohortes != null && cohortes.Any())
+                    {
+
+                        <table class="table table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th>Cohorte</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Final</th>
+                                    @if (usuario != null && rol == "Administrador")
+                                    { 
+                                    <th>Acciones</th>
+                                    }
+                                    </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var cohorte in cohortes)
+                                {
+                                    <tr>
+                                        <td>@cohorte.Nombre</td>
+                                        <td>@cohorte.FechaInicio</td>
+                                        <td>@cohorte.FechaFin</td>
+
+
+                                        @if (usuario != null && rol == "Administrador")
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("RemoverCohorte","Participantes", new { idCohorte = cohorte.Id,idParticipante = detalle.Id})"
+                                                   class="btn btn-sm btn-warning">
+                                                    Remover Cohorte
+                                                </a>
+                                            </td>
+                                        }
+
+
+
+
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    }
+                    else
+                    {
+
+                        <div class="alert alert-info">
+                            Este participante no tiene cohortes asignados.
+                        </div>
+
+                    }
+
+                    <hr />
+                    <h5>Cursos asignados</h5>
+
+                    @if (cursos != null && cursos.Any())
+                    {
+
+                        <table class="table table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th>Código</th>
+                                    <th>Horas Prácticas</th>
+                                    @if (usuario != null && rol == "Administrador")
+                                    {
+                                        <th>Acciones</th>
+                                    }
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var curso in cursos)
+                                {
+                                    <tr>
+                                        <td>@curso.Titulo</td>
+                                        <td>@curso.CodigoCurso</td>
+                                        <td>@curso.HorasPracticas</td>
+                                        @if (usuario != null && rol == "Administrador")
+                                        {
+                                            <td>
+                                                <a href="@Url.Action("RemoverCurso","Participantes", new { idCurso = curso.Id,idParticipante = detalle.Id})"
+                                                   class="btn btn-sm btn-warning">
+                                                    Remover Curso
+                                                </a>
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+
+                            </tbody>
+
+                        </table>
+
+                    }
+                    else
+                    {
+
+                        <div class="alert alert-info">
+                            Este participante no tiene cursos asignados.
+                        </div>
+
+                    }
+
                 </div>
 
-                <hr />
-
-                <h5>Cursos asignados</h5>
-
-                @if (cursos != null && cursos.Any())
-                {
-
-                    <table class="table table-striped">
-
-                        <thead>
-                            <tr>
-                                <th>Curso</th>
-                                <th>Código</th>
-                                <th>Horas Prácticas</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            @foreach (var curso in cursos)
-                            {
-                                <tr>
-                                    <td>@curso.Titulo</td>
-                                    <td>@curso.CodigoCurso</td>
-                                    <td>@curso.HorasPracticas</td>
-                                </tr>
-                            }
-
-                        </tbody>
-
-                    </table>
-
-                }
-                else
-                {
-
-                    <div class="alert alert-info">
-                        Este participante no tiene cursos asignados.
-                    </div>
-
-                }
+               
 
             </div>
         </div>
