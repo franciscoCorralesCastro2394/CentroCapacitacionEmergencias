@@ -24,7 +24,7 @@ namespace CentroCapacitacionEmergencias.Controllers
         }
 
 
-        public ActionResult ListaParticipantes(int? detalleID,string nombre,string cedula)
+        public ActionResult ListaParticipantes(int? detalleID,string nombre,string cedula,int? idChorte)
         {
 
             if (!string.IsNullOrEmpty(nombre))
@@ -46,11 +46,24 @@ namespace CentroCapacitacionEmergencias.Controllers
                 return View(participantesPorNombre);
             }
 
+            if (idChorte != null)
+            {
+                // Filtrar por identificacion (búsqueda parcial)
+                var participantesPorCohorte = db.ParticipanteCohortes
+                    .Where(pc => pc.CohorteID == idChorte && pc.Participante.Estado)
+                    .Select(p => p.Participante)
+                    .ToList();
+
+
+                return View(participantesPorCohorte);
+            }
+
             // Obtener solo los participantes activos (Estado = true)
             var participantes = db.Participantes.
                 Where(p => p.Estado).
                 ToList();
 
+            ViewBag.CohortesSistema = new SelectList(db.Cohortes, "Id", "Nombre");
 
             // Si se proporciona un ID de detalle, buscar el participante correspondiente y sus cursos
             if (detalleID != null)

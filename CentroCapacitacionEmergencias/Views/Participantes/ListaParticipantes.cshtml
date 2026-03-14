@@ -15,13 +15,17 @@
 
 <h2 class="mb-4">Lista de Participantes</h2>
 
-<div class="mb-3">
-    <a href="@Url.Action("Create","Participantes")" class="btn btn-primary">
-        Nuevo Participante
-    </a>
-</div>
+@if (usuario != null && rol == "Administrador")
+{
+    <div class="mb-3">
+        <a href="@Url.Action("Create","Participantes")" class="btn btn-primary">
+            Nuevo Participante
+        </a>
+    </div>
+}
 
-<table class="table table-striped table-bordered">
+
+<table class="table table-striped table-bordered w-100">
 
     @using (Html.BeginForm("ListaParticipantes", "Participantes", FormMethod.Get))
     {
@@ -47,6 +51,16 @@
 
             </div>
 
+            <div class="form-group mb-3">
+
+
+                @Html.DropDownList(
+                    "Id",
+                    (SelectList)ViewBag.CohortesSistema,
+                    "Seleccione una cohorte",
+                    new { @class = "form-control" })
+            </div>
+
             <div class="col-md-2">
 
                 <button type="submit" class="btn btn-primary">
@@ -58,7 +72,7 @@
         </div>
     }
 
-    <thead class="table-dark">
+    <thead class="table-dark ">
         <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -90,6 +104,11 @@
 
                     @if (usuario != null && rol == "Administrador")
                     {
+                        <a href="@Url.Action("Asignar","Asignar", new { id = item.Id })"
+                           class="btn btn-sm btn-success">
+                            Añadir Cursos y Cohorte
+                        </a>
+
                         <a href="@Url.Action("Editar","Participantes", new { id = item.Id })"
                            class="btn btn-sm btn-warning">
                             Editar
@@ -100,6 +119,7 @@
                            class="btn btn-sm btn-danger">
                             Eliminar
                         </a>
+
 
                     }
 
@@ -157,10 +177,10 @@
                                     <th>Fecha Inicio</th>
                                     <th>Fecha Final</th>
                                     @if (usuario != null && rol == "Administrador")
-                                    { 
-                                    <th>Acciones</th>
+                                    {
+                                        <th>Acciones</th>
                                     }
-                                    </tr>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -259,7 +279,7 @@
 
                 </div>
 
-               
+
 
             </div>
         </div>
