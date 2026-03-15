@@ -1,7 +1,9 @@
-﻿using System;
+﻿using CentroCapacitacionEmergencias.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CentroCapacitacionEmergencias.ViewModels
 {
@@ -33,7 +35,23 @@ namespace CentroCapacitacionEmergencias.ViewModels
 
         public string ContactoEmergencia { get; set; }
 
+        //Filtros  
 
+        public string filtroNombre { get; set; }
+        public string filtroCedula { get; set; }
+        public int? filtroCohorteId { get; set; }
+        public int? filtroCursoId { get; set; }
+
+        //Listas paar busqueda
+        public List<SelectListItem> Cohortes { get; set; }
+        public List<SelectListItem> Cursos { get; set; }
+
+        //Lista de participantes
+        public List<Participante> Participantes { get; set; }
+
+        //detalle ID para busqueda Detalles de un partisipante 
+
+        public int? detalleId { get; set; } 
 
     }
 }

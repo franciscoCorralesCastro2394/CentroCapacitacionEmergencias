@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<CentroCapacitacionEmergencias.Models.Participante>
+@model CentroCapacitacionEmergencias.ViewModels.ParticipanteViewModel
 
 @{
     var detalle = ViewBag.ParticipanteDetalle as CentroCapacitacionEmergencias.Models.Participante;
@@ -31,42 +31,36 @@
     {
         <div class="row mb-3">
 
-            <div class="col-md-4">
-
-                <input type="text"
-                       name="nombre"
-                       class="form-control"
-                       placeholder="Buscar por nombre"
-                       value="@Request["nombre"]" />
-
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.filtroNombre,
+                new { @class = "form-control", placeholder = "Nombre" })
             </div>
 
-            <div class="col-md-4">
-
-                <input type="text"
-                       name="cedula"
-                       class="form-control"
-                       placeholder="Buscar por cédula"
-                       value="@Request["cedula"]" />
-
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.filtroCedula,
+                new { @class = "form-control", placeholder = "Cédula" })
             </div>
 
-            <div class="form-group mb-3">
+            <div class="col-md-3">
+                @Html.DropDownListFor(
+                m => m.filtroCohorteId,
+                Model.Cohortes,
+                "Seleccione Cohorte",
+                new { @class = "form-control" })
+            </div>
 
-
-                @Html.DropDownList(
-                    "Id",
-                    (SelectList)ViewBag.CohortesSistema,
-                    "Seleccione una cohorte",
-                    new { @class = "form-control" })
+            <div class="col-md-3">
+                @Html.DropDownListFor(
+                m => m.filtroCursoId,
+                Model.Cursos,
+                "Seleccione Curso",
+                new { @class = "form-control" })
             </div>
 
             <div class="col-md-2">
-
-                <button type="submit" class="btn btn-primary">
+                <button class="btn btn-primary">
                     Buscar
                 </button>
-
             </div>
 
         </div>
@@ -86,7 +80,7 @@
 
     <tbody>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Participantes)
         {
             <tr>
                 <td>@item.Id</td>
@@ -97,7 +91,7 @@
                 <td>@item.Provincia</td>
 
                 <td>
-                    <a href="@Url.Action("ListaParticipantes", new { detalleId = item.Id })"
+                    <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
                        class="btn btn-sm btn-info">
                         Detalles
                     </a>

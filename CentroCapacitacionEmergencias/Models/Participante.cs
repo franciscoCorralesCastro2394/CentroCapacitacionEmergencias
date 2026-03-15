@@ -56,5 +56,6 @@ namespace CentroCapacitacionEmergencias.Models
         public bool Estado { get; set; }
 
         public virtual ICollection<Curso> ParticipanteCursos { get; set; }
+
     }
 }
