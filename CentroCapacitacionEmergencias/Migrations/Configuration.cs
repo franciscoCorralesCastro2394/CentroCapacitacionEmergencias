@@ -203,6 +203,56 @@
                     );
             }
 
+            if (!context.Destrezas.Any()) {
+
+                context.Destrezas.Add(new Destreza { Titulo = "Evaluación primaria del paciente", Descripcion = "Valoración inicial ABC" });
+                context.Destrezas.Add(new Destreza { Titulo = "RCP básica", Descripcion = "Reanimación cardiopulmonar en adultos" });
+                context.Destrezas.Add(new Destreza { Titulo = "Uso de DEA", Descripcion = "Desfibrilador externo automático" });
+                context.Destrezas.Add(new Destreza { Titulo = "Control de vía aérea básica", Descripcion = "Apertura y mantenimiento de vía aérea" });
+                context.Destrezas.Add(new Destreza { Titulo = "Ventilación con bolsa-válvula-mascarilla", Descripcion = "Soporte ventilatorio manual" });
+
+                context.Destrezas.Add(new Destreza { Titulo = "Control de hemorragias", Descripcion = "Uso de presión directa y torniquete" });
+                context.Destrezas.Add(new Destreza { Titulo = "Inmovilización de extremidades", Descripcion = "Uso de férulas" });
+                context.Destrezas.Add(new Destreza { Titulo = "Manejo de paciente politraumatizado", Descripcion = "Atención integral en trauma" });
+                context.Destrezas.Add(new Destreza { Titulo = "Colocación de collar cervical", Descripcion = "Estabilización cervical" });
+                context.Destrezas.Add(new Destreza { Titulo = "Extricación de paciente", Descripcion = "Rescate seguro en accidentes" });
+                                    
+            }
+
+            if (!context.CursoDestrezas.Any())
+            {
+                context.CursoDestrezas.Add(new CursoDestrezas { CursoId = 1, DestrezaId = 1 });
+                context.CursoDestrezas.Add(new CursoDestrezas { CursoId = 2, DestrezaId = 2 });
+                context.CursoDestrezas.Add(new CursoDestrezas { CursoId = 3, DestrezaId = 3 });
+            }
+
+            if (!context.PuntoControls.Any()) { 
+                context.PuntoControls.Add(new PuntoControl {Descripcion = "Verifica seguridad de la escena antes de intervenir" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Utiliza equipo de protección personal (EPP) correctamente" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Realiza evaluación primaria (ABC) de forma adecuada" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Identifica correctamente el estado de conciencia del paciente" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Activa el sistema de emergencias oportunamente" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Inicia maniobras dentro del tiempo esperado" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Aplica técnica correcta según el protocolo de la destreza" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Mantiene control de la vía aérea en todo momento" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Controla hemorragias de manera efectiva" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Realiza uso adecuado de los equipos disponibles" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Sigue la secuencia del protocolo sin omitir pasos críticos" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Mantiene comunicación clara con el equipo" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Toma decisiones adecuadas bajo presión" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Evita acciones que comprometan la seguridad del paciente" });
+                context.PuntoControls.Add(new PuntoControl { Descripcion = "Finaliza el procedimiento conforme al protocolo establecido" });
+            }
+
+            if (!context.PuntoControlDestreza.Any()) 
+            {
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+            }
+
             context.SaveChanges();
         }
 

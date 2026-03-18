@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CohortesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\EvaluacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantesController.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
@@ -185,19 +186,45 @@
     <Compile Include="Migrations\202603120607332_RelacionPartiCohorte.Designer.cs">
       <DependentUpon>202603120607332_RelacionPartiCohorte.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603170354389_CrearTablaDestrezasCursosEva.cs" />
+    <Compile Include="Migrations\202603170354389_CrearTablaDestrezasCursosEva.Designer.cs">
+      <DependentUpon>202603170354389_CrearTablaDestrezasCursosEva.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603170358492_CrearTablaDestrezasCursosEva1.cs" />
+    <Compile Include="Migrations\202603170358492_CrearTablaDestrezasCursosEva1.Designer.cs">
+      <DependentUpon>202603170358492_CrearTablaDestrezasCursosEva1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603170400131_CrearTablaDestrezasCursosEva2.cs" />
+    <Compile Include="Migrations\202603170400131_CrearTablaDestrezasCursosEva2.Designer.cs">
+      <DependentUpon>202603170400131_CrearTablaDestrezasCursosEva2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603180647265_CrearTablasPuntosControl.cs" />
+    <Compile Include="Migrations\202603180647265_CrearTablasPuntosControl.Designer.cs">
+      <DependentUpon>202603180647265_CrearTablasPuntosControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202603180707037_actualizartablas.cs" />
+    <Compile Include="Migrations\202603180707037_actualizartablas.Designer.cs">
+      <DependentUpon>202603180707037_actualizartablas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cohorte.cs" />
     <Compile Include="Models\Curso.cs" />
+    <Compile Include="Models\CursoDestrezas.cs" />
+    <Compile Include="Models\Destreza.cs" />
+    <Compile Include="Models\EvaluacionDestreza.cs" />
+    <Compile Include="Models\PuntoControlDestreza.cs" />
     <Compile Include="Models\LoginSecuritySettings.cs" />
     <Compile Include="Models\Participante.cs" />
     <Compile Include="Models\ParticipanteCohorte.cs" />
     <Compile Include="Models\ParticipanteCurso.cs" />
+    <Compile Include="Models\PuntoControl.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityConfig\SecurityConfig.cs" />
     <Compile Include="ViewModels\AsignarCursoCohorte.cs" />
     <Compile Include="ViewModels\CursoViewModel.cs" />
+    <Compile Include="ViewModels\EvaluacionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ParticipanteViewModel.cs" />
   </ItemGroup>
@@ -259,6 +286,7 @@
     <Content Include="Views\Participantes\Create.cshtml" />
     <Content Include="Views\Participantes\ListaParticipantes.cshtml" />
     <Content Include="Views\Asignar\Asignar.cshtml" />
+    <Content Include="Views\Evaluacion\Evaluacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -326,6 +354,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603120607332_RelacionPartiCohorte.resx">
       <DependentUpon>202603120607332_RelacionPartiCohorte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603170354389_CrearTablaDestrezasCursosEva.resx">
+      <DependentUpon>202603170354389_CrearTablaDestrezasCursosEva.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603170358492_CrearTablaDestrezasCursosEva1.resx">
+      <DependentUpon>202603170358492_CrearTablaDestrezasCursosEva1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603170400131_CrearTablaDestrezasCursosEva2.resx">
+      <DependentUpon>202603170400131_CrearTablaDestrezasCursosEva2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603180647265_CrearTablasPuntosControl.resx">
+      <DependentUpon>202603180647265_CrearTablasPuntosControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603180707037_actualizartablas.resx">
+      <DependentUpon>202603180707037_actualizartablas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

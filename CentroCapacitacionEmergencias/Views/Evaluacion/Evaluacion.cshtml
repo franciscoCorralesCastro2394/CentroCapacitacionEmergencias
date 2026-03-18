@@ -1,0 +1,17 @@
+﻿
+@model CentroCapacitacionEmergencias.ViewModels.EvaluacionViewModel
+
+@{
+    ViewBag.Title = "Evaluacion";
+}
+
+<h2>
+    Participante:
+    <strong>@Model.Participante.NombreCompleto</strong>
+</h2>
+
+<h2>
+    Evaluacion de la destreza:
+    <strong>@Model.Destreza.Titulo</strong> del curso:<strong>@Model.Curso.Titulo</strong>
+</h2>
+

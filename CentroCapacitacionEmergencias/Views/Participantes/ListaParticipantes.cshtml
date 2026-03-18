@@ -3,8 +3,12 @@
 
 @{
     var detalle = ViewBag.ParticipanteDetalle as CentroCapacitacionEmergencias.Models.Participante;
+    var evaluar = ViewBag.ParticipanteEvaluar as CentroCapacitacionEmergencias.Models.Participante;
     var cursos = ViewBag.Cursos as List<CentroCapacitacionEmergencias.Models.Curso>;
     var cohortes = ViewBag.Cohortes as List<CentroCapacitacionEmergencias.Models.Cohorte>;
+    var destrezas = ViewBag.destrezas as List<CentroCapacitacionEmergencias.Models.Destreza>;
+
+
 }
 
 
@@ -91,10 +95,22 @@
                 <td>@item.Provincia</td>
 
                 <td>
-                    <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
-                       class="btn btn-sm btn-info">
-                        Detalles
-                    </a>
+                    @if (usuario != null && rol == "Instructor")
+                    {
+
+                        <a href="@Url.Action("ListaParticipantes",new { evaluacionId = item.Id })"
+                           class="btn btn-sm btn-info">
+                            Evaluación
+                        </a>
+
+                        <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
+                           class="btn btn-sm btn-info">
+                            Detalles
+                        </a>
+
+                    }
+
+
 
                     @if (usuario != null && rol == "Administrador")
                     {
@@ -276,6 +292,103 @@
 
 
             </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop fade show"></div>
+
+}
+
+
+@if (evaluar != null)
+{
+
+    <div class="modal fade show" style="display:block;" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Evaluación Destrezas de 
+                        <strong>
+                            @Model.ParticipanteEvaluado
+                        </strong>
+                    </h5>
+                    <a href="@Url.Action("ListaParticipantes")" class="btn-close"></a>
+                </div>
+
+                <div class="modal-body">
+
+                    <hr />
+                    <h5>
+                        Cursos por Evaluar:
+                        <strong>
+                            @Model.CursoTituloEvaluar
+                        </strong>
+                    </h5>
+
+
+                    @using (Html.BeginForm("ListaParticipantes", "Participantes", FormMethod.Get))
+                    {
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.evaluacionId,
+                            new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <br>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(
+                            m => m.CursoIdEvaluar,
+                            Model.CursosPorEvaluar,
+                            "Seleccione un Curso",
+                            new { @class = "form-control", onchange = "this.form.submit();" })
+                        </div>
+                    }
+
+                    <br>
+                    <hr>
+
+                    <div class="row mb-3">
+
+                        @if (Model.destrezasParticipante != null)
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Destreza</th>
+                                        <th>Descripción</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var destreza in Model.destrezasParticipante)
+                                    {
+                                        <tr>
+                                            <td>@destreza.Titulo</td>
+                                            <td>@destreza.Descripcion</td>
+                                            <td>
+                                                @if (usuario != null && rol == "Instructor")
+                                                {
+
+                                                    <a href="@Url.Action("Evaluacion","Evaluacion",new {idCurso = @Model.CursoIdEvaluar,idParticipante = @Model.evaluacionId,idDestreza = destreza.Id})"
+                                                       class="btn btn-sm btn-info">
+                                                        Evaluar Destreza
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+
+
+
+                </div>
+
+
+
+                </div>
         </div>
     </div>
 

@@ -51,7 +51,24 @@ namespace CentroCapacitacionEmergencias.ViewModels
 
         //detalle ID para busqueda Detalles de un partisipante 
 
-        public int? detalleId { get; set; } 
+        public int? detalleId { get; set; }
 
+        //ID para Evaluar un participante
+        public int? evaluacionId { get; set; }
+
+        //Nombre del participante evaluado 
+        public string ParticipanteEvaluado { get; set; }
+
+        //Listas para mostrar en detalles de un participante
+        public List<Destreza> destrezasParticipante { get; set; }
+
+        //Lista de cursos para evaluar a un participante
+        public List<SelectListItem> CursosPorEvaluar { get; set; }
+
+        //ID del curso para evaluar a un participante
+        public int CursoIdEvaluar { get; set; }
+
+        //titulo del curso a evaluar
+        public string CursoTituloEvaluar { get; set; }
     }
 }

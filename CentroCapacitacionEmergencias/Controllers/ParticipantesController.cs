@@ -24,7 +24,7 @@ namespace CentroCapacitacionEmergencias.Controllers
         }
 
 
-        public ActionResult ListaParticipantes(ParticipanteViewModel participanteViewModel, int? detalleId)
+        public ActionResult ListaParticipantes(ParticipanteViewModel participanteViewModel, int? detalleId, int? evaluacionId,int? CursoIdEvaluar)
         {
 
             participanteViewModel.Cohortes = db.Cohortes
@@ -40,6 +40,10 @@ namespace CentroCapacitacionEmergencias.Controllers
                                                   Value = c.Id.ToString(),
                                                   Text = c.Titulo
                                               }).ToList();
+
+            
+
+
             var query = db.Participantes
                         .Where(p => p.Estado);
 
@@ -91,6 +95,44 @@ namespace CentroCapacitacionEmergencias.Controllers
                 ViewBag.Cursos = cursos;
                 // Si se proporciona un ID de detalle, buscar el participante correspondiente
                 ViewBag.ParticipanteDetalle = db.Participantes.Find(participanteViewModel.detalleId);
+
+            }
+
+            
+            if (evaluacionId != null)
+            {
+                //obtiene los cursos en lso que se registro un estudiante paar evaluar
+                var cursosSelectList = db.ParticipanteCursos
+                                .Where(pc => pc.ParticipanteId == evaluacionId)
+                                .Select(pc => new SelectListItem
+                                {
+                                    Value = pc.Curso.Id.ToString(),
+                                    Text = pc.Curso.Titulo
+                                })
+                                .ToList();
+
+
+                participanteViewModel.CursosPorEvaluar = cursosSelectList;
+
+                ViewBag.ParticipanteEvaluar = db.Participantes.Find(participanteViewModel.evaluacionId);
+                
+                participanteViewModel.ParticipanteEvaluado = db.Participantes.Find(participanteViewModel.evaluacionId).NombreCompleto;
+
+            }
+
+            if (CursoIdEvaluar != null) {
+             
+                //obtiene los cursos de un participante
+                var destrezas = db.CursoDestrezas
+                            .Where(cd => cd.CursoId == CursoIdEvaluar)
+                            .Select(cd => cd.Destreza)
+                            .ToList();
+
+                ViewBag.destrezas = destrezas;
+                participanteViewModel.destrezasParticipante = destrezas;
+
+                participanteViewModel.CursoTituloEvaluar = db.Cursos.Find(participanteViewModel.CursoIdEvaluar).Titulo;
+
             }
 
             participanteViewModel.Participantes = query.ToList();
@@ -282,6 +324,24 @@ namespace CentroCapacitacionEmergencias.Controllers
             }
 
             return RedirectToAction("ListaParticipantes");
+        }
+
+        public ActionResult Evaluar(int? cursoId)
+        {
+            
+
+            // Lista de destrezas
+            var destrezas = new List<Destreza>();
+
+            if (cursoId.HasValue && cursoId > 0)
+            {
+                destrezas = db.CursoDestrezas
+                    .Where(cd => cd.CursoId == cursoId)
+                    .Select(cd => cd.Destreza)
+                    .ToList();
+            }
+
+            return View(destrezas);
         }
     }
 }
