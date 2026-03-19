@@ -1,5 +1,6 @@
 ﻿using CentroCapacitacionEmergencias.Data;
 using CentroCapacitacionEmergencias.Models;
+using CentroCapacitacionEmergencias.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,6 +48,17 @@ namespace CentroCapacitacionEmergencias.Controllers
             }
 
             return View(model);
+        }
+
+        public ActionResult Lista() 
+        {
+            // Obtener todas las cohortes de la base de datos
+            List<Cohorte> cohortes = db.Cohortes.ToList();
+
+            CohorteViewModel cohorteViewModel = new CohorteViewModel();
+            cohorteViewModel.Cohortes = cohortes;
+
+            return View(cohorteViewModel);
         }
     }
 }

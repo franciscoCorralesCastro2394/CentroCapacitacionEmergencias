@@ -27,18 +27,24 @@
                    class="btn btn-primary w-100">
                     Registrar Nuevo Participante
                 </a>
-               
-                    <a href="@Url.Action("ListaParticipantes", "Participantes")"
-                       class="btn btn btn-info w-100">
-                        Modulo Participantes
-                    </a>
-               
+
+                <a href="@Url.Action("ListaParticipantes", "Participantes")"
+                   class="btn btn btn-info w-100">
+                    Modulo Participantes
+                </a>
+
             </div>
             <div class="mb-3">
                 <a href="@Url.Action("Create", "Cohortes")"
                    class="btn btn-primary w-100">
                     Registrar Nuevo Cohorte
                 </a>
+                <div class="mb-3">
+                    <a href="@Url.Action("Lista", "Cohortes")"
+                       class="btn btn-primary w-100">
+                        Lista de Cohortes
+                    </a>
+                </div>
             </div>
             <div class="mb-3">
                 <a href="@Url.Action("Create", "Cursos")"
@@ -54,6 +60,14 @@
                 <a href="@Url.Action("ListaParticipantes", "Participantes")"
                    class="btn btn-primary w-100">
                     Modulo Participantes
+                </a>
+            </div>
+
+
+            <div class="mb-3">
+                <a href="@Url.Action("Lista", "Cohortes")"
+                   class="btn btn-primary w-100">
+                    Lista de Cohortes
                 </a>
             </div>
         }

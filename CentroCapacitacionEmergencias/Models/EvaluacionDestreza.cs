@@ -13,6 +13,8 @@ namespace CentroCapacitacionEmergencias.Models
         public int CursoId { get; set; }
         public int DestrezaId { get; set; }
 
+        public int InstructorId { get; set; }
+
         public int TiempoRespuesta { get; set; }
         public int PuntajeFinal { get; set; }
 

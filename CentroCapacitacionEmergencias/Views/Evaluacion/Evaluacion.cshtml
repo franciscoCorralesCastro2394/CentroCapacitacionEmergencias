@@ -15,3 +15,111 @@
     <strong>@Model.Destreza.Titulo</strong> del curso:<strong>@Model.Curso.Titulo</strong>
 </h2>
 
+@using (Html.BeginForm("GuardarEvaluacion", "Evaluacion", FormMethod.Post))
+{
+
+    <!-- Hidden -->
+    @Html.HiddenFor(m => m.idCurso)
+    @Html.HiddenFor(m => m.idParticipante)
+    @Html.HiddenFor(m => m.idDestreza)
+
+<div class="form-group mb-3">
+
+    <h3>Puntos de Control</h3>
+
+    <table class="table table-striped table-bordered w-100">
+        <thead class="table-dark ">
+            <tr>
+                <th>Cumplido</th>
+                <th>No Cumplido</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var punto in Model.PuntoControls)
+            {
+                <tr>
+                    <!-- Hidden SIEMPRE envía false -->
+                    <input type="hidden" name="Puntos[@punto.Id]" value="false" />
+
+                    <td>
+                        <div class="form-radio">
+
+                            <input class="form-radio-input"
+                                   type="radio"
+                                   name="Puntos[@punto.Id]"
+                                   value="true" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-radio">
+
+                            <input class="form-radio-input"
+                                   type="radio"
+                                   name="Puntos[@punto.Id]"
+                                   value="false" />
+                        </div>
+                    </td>
+                    <td>
+                        <label class="form-check-label">
+                            @punto.Descripcion
+                        </label>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <br />
+    <!-- Tiempo -->
+    <div class="form-group">
+        <label>Tiempo (mm:ss)</label>
+        @Html.TextBoxFor(m => m.Tiempo, new
+        {
+            @class = "form-control",
+            placeholder = "mm:ss",
+            pattern = @"^[0-5][0-9]:[0-5][0-9]$",
+            required = "required"
+        })
+        @Html.ValidationMessageFor(m => m.Tiempo, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Puntaje -->
+    <div class="form-group">
+        <label>Puntaje</label>
+        @Html.TextBoxFor(m => m.Puntaje, new
+        {
+            @class = "form-control",
+            type = "number",
+            min = "1",
+            max = "100",
+            required = "required"
+        })
+        @Html.ValidationMessageFor(m => m.Puntaje, "", new { @class = "text-danger" })
+    </div>
+
+    <!-- Aprobación -->
+    <div class="form-group mt-3">
+        <div class="form-check">
+            @Html.CheckBoxFor(m => m.AprobadoPorInstructor, new { required = "required" })
+            <label class="form-check-label">
+                Aprobación del Instructor
+            </label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">
+        Guardar Evaluación
+    </button>
+
+    <a href="@Url.Action("ListaParticipantes","Participantes")" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</div>
+
+}
+
+

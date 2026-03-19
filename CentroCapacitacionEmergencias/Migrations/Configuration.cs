@@ -247,10 +247,12 @@
             if (!context.PuntoControlDestreza.Any()) 
             {
                 context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
-                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
-                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
-                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
-                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 2 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 1, IdPunto = 3 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 2, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 3, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 4, IdPunto = 1 });
+                context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 5, IdPunto = 1 });
             }
 
             context.SaveChanges();

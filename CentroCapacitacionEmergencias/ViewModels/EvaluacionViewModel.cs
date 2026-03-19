@@ -27,5 +27,22 @@ namespace CentroCapacitacionEmergencias.ViewModels
         // Lista de puntos de control asociados a la destreza que se está evaluando
         public List<PuntoControl> PuntoControls { get; set; }
 
+
+        //Evaluacion 
+
+        public int ParticipanteId { get; set; }
+        public int CursoId { get; set; }
+        public int DestrezaId { get; set; }
+
+        public string Tiempo { get; set; }
+
+        public int Puntaje { get; set; }
+
+        public Dictionary<int, bool> Puntos { get; set; }
+
+        public List<PuntoControl> ListaPuntos { get; set; }
+
+        public bool AprobadoPorInstructor { get; set; }
+
     }
 }
