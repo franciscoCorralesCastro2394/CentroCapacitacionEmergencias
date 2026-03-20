@@ -1,8 +1,19 @@
 ﻿
-@model CentroCapacitacionEmergencias.Models.Cohorte
+@model CentroCapacitacionEmergencias.ViewModels.CohorteViewModel
 
 
-<h2>Nueva Cohorte</h2>
+@if (Model.Cohorte.Id == 0)
+{
+    <h2>
+        Crear Cohorte
+    </h2>
+}
+else
+{
+    <h2>
+        Modificar Cohorte
+    </h2>
+}
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -12,37 +23,49 @@
     </div>
 }
 
-@using (Html.BeginForm())
+@using (Model.Cohorte.Id != 0 ? Html.BeginForm("EditarCohorte", "Cohortes", FormMethod.Post) : Html.BeginForm())
 {
     <div class="card p-4 shadow-sm">
+        
+        @Html.HiddenFor(m => m.Cohorte.Id)
 
         <div class="mb-3">
             <label>Nombre de Cohorte</label>
-            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.Cohorte.Nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Cohorte.Nombre, "", new { @class = "text-danger" })
         </div>
 
         <div class="mb-3">
             <label>Fecha Inicio</label>
-            @Html.TextBoxFor(m => m.FechaInicio, new { @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cohorte.FechaInicio, new { @type = "date", @class = "form-control" })
         </div>
 
         <div class="mb-3">
             <label>Fecha Fin</label>
-            @Html.TextBoxFor(m => m.FechaFin, new { @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cohorte.FechaFin, new { @type = "date", @class = "form-control" })
         </div>
 
-        <button type="submit" class="btn btn-primary">
-            Crear Cohorte
-        </button>
+        @if (Model.Cohorte.Id != 0)
+        {
+            <button type="submit" class="btn btn-warning">
+                Modificar Cohorte
+            </button>
+
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">
+                Crear Cohorte
+            </button>
+        }
         <br />
-        <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+        <a href="@Url.Action("Lista","Cohortes")" class="btn btn-secondary">
             Cancelar
         </a>
 
     </div>
 
-        }
+}
 
 
 

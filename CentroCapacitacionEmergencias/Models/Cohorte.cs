@@ -8,7 +8,7 @@ namespace CentroCapacitacionEmergencias.Models
 {
     public class Cohorte
     {
-        public int Id { get; set; }
+        public int Id { get; set; } = 0;
 
         [Required]
         public string Nombre { get; set; }
@@ -18,5 +18,7 @@ namespace CentroCapacitacionEmergencias.Models
 
         [Required]
         public DateTime FechaFin { get; set; }
+
+        public bool? Archivado { get; set; }
     }
 }

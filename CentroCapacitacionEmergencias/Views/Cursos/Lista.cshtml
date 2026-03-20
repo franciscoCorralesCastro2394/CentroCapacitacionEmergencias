@@ -1,0 +1,78 @@
+﻿
+
+@model CentroCapacitacionEmergencias.ViewModels.CursoViewModel
+
+@{
+    ViewBag.Title = "ListaCohortes";
+}
+
+@{
+    var usuario = @Session["UserName"];
+    var rol = @Session["UserRole"] as string;
+}
+
+<h2>ListaCohortes</h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Titulo</th>
+            <th>Código</th>
+            <th>Horas</th>
+            @if (usuario != null && rol == "Administrador")
+            {
+                <th>Acciones</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Cursos)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.CodigoCurso</td>
+                <td>@item.HorasPracticas</td>
+                @if (usuario != null && rol == "Administrador")
+                {
+                    <td>
+
+                        <a href="@Url.Action("Editar","Cursos", new { id = item.Id })"
+                           class="btn btn-sm btn-warning">
+                            Editar
+                        </a>
+
+
+                        @if (item.Archivado == false)
+                        {
+                            <a href="@Url.Action("Delete","Cursos", new { id = item.Id })"
+                               class="btn btn-sm btn-primary">
+                                Desarchivar
+                            </a>
+
+                        }
+
+                        @if (item.Archivado == true)
+                        {
+                            <a href="@Url.Action("Delete","Cursos", new { id = item.Id })"
+                               class="btn btn-sm btn-danger">
+                                Archivar
+                            </a>
+
+                        }
+                    </td>
+            }
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<a href="@Url.Action("Index", "Home")"
+   class="btn btn-secondary w-100">
+    Ir al Dashboard
+</a>

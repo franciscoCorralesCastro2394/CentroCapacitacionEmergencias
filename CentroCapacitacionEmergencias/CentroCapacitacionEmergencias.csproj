@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202603190644239_actualizacionEvaluacion.Designer.cs">
       <DependentUpon>202603190644239_actualizacionEvaluacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603192225393_actualizacionCohortesCursos.cs" />
+    <Compile Include="Migrations\202603192225393_actualizacionCohortesCursos.Designer.cs">
+      <DependentUpon>202603192225393_actualizacionCohortesCursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cohorte.cs" />
     <Compile Include="Models\Curso.cs" />
@@ -293,6 +297,7 @@
     <Content Include="Views\Asignar\Asignar.cshtml" />
     <Content Include="Views\Evaluacion\Evaluacion.cshtml" />
     <Content Include="Views\Cohortes\Lista.cshtml" />
+    <Content Include="Views\Cursos\Lista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -378,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603190644239_actualizacionEvaluacion.resx">
       <DependentUpon>202603190644239_actualizacionEvaluacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603192225393_actualizacionCohortesCursos.resx">
+      <DependentUpon>202603192225393_actualizacionCohortesCursos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

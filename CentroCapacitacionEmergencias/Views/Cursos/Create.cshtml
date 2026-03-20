@@ -11,13 +11,24 @@
     </div>
 }
 
+@if (Model.Id == 0)
+{
+    <h2>
+        Crear Curso
+    </h2>
+}
+else
+{
+    <h2>
+        Modificar Curso
+    </h2>
+}
 
-
-@using (Html.BeginForm())
+@using (Model.Id != 0 ? Html.BeginForm("EditarCurso", "Cursos", FormMethod.Post) : Html.BeginForm())
 {
     <div class="card p-4 shadow-sm">
 
-
+        @Html.HiddenFor(m => m.Id)
 
         <div class="mb-3">
             <label>Título</label>
@@ -34,21 +45,42 @@
             @Html.TextBoxFor(m => m.HorasPracticas, new { @class = "form-control" })
         </div>
 
-        <div class="mb-3">
-            <label>Instructores</label>
-            @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })
-        </div>
+        @if (Model.Id == 0)
+        {
+            <div class="mb-3">
+                <label>Instructores</label>
+                @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })
+            </div>
 
-        <div class="mb-3">
-            <label>Cohortes</label>
-            @Html.ListBoxFor(m => m.CohortesSeleccionadas, Model.Cohortes, new { @class = "form-control" })
-        </div>
+        }
 
-        <button type="submit" class="btn btn-primary">
-            Crear Curso
-        </button>
+
+        @if (Model.Id == 0)
+        {
+            <div class="mb-3">
+                <label>Cohortes</label>
+                @Html.ListBoxFor(m => m.CohortesSeleccionadas, Model.Cohortes, new { @class = "form-control" })
+            </div>
+        }
+
+
+        @if (Model.Id != 0)
+        {
+            <button type="submit" class="btn btn-warning">
+                Modificar Curso
+            </button>
+
+        }
+        else
+        {
+            <button type="submit" class="btn btn-primary">
+                Crear Curso
+            </button>
+        }
+
+
         <br />
-        <a href="@Url.Action("Index","Home")" class="btn btn-secondary">
+        <a href="@Url.Action("Lista", "Cursos")" class="btn btn-secondary">
             Cancelar
         </a>
     </div>

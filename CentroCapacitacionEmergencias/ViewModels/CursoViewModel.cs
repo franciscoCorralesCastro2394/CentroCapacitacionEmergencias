@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CentroCapacitacionEmergencias.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace CentroCapacitacionEmergencias.ViewModels
 {
     public class CursoViewModel
     {
+        public int Id { get; set; } = 0;
         public string Titulo { get; set; }
 
         public string CodigoCurso { get; set; }
@@ -21,5 +23,7 @@ namespace CentroCapacitacionEmergencias.ViewModels
         public List<SelectListItem> Instructores { get; set; }
 
         public List<SelectListItem> Cohortes { get; set; }
+
+        public List<Curso> Cursos { get; set; }
     }
 }

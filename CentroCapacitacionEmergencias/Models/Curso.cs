@@ -19,6 +19,8 @@ namespace CentroCapacitacionEmergencias.Models
         [Required]
         public int HorasPracticas { get; set; }
 
+        public bool? Archivado  { get; set; }
+
         // Relación con instructores
         public virtual ICollection<Usuario> Instructores { get; set; }
 
