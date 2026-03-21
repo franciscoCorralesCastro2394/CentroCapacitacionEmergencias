@@ -1,0 +1,97 @@
+﻿@model List<CentroCapacitacionEmergencias.ViewModels.EstadisticasViewModel>
+
+@{
+    ViewBag.Title = "EstadisticasPart";
+}
+
+<h2>Estadisticas del Participante 
+</h2>
+
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        <button class="btn btn-sm btn-outline-dark"
+                onclick="this.closest('.alert').remove()">
+            ✖
+        </button>
+    </div>
+}
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Participante</th>
+            <th>Curso</th>
+            <th>Destreza</th>
+            <th>TiempoRespuesta</th>
+            <th>Puntaje Final</th>
+            <th>Fallas Críticas</th>
+            <th>Aprobación</th>
+            <th>Instructor</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Participante</td>
+                <td>@item.Curso</td>
+                <td>@item.Destreza</td>
+                <td>@item.TiempoRespuesta</td>
+                <td>@item.PuntajeFinal</td>
+
+                @if (item.TieneFallaCritica)
+                {
+                    <td>Si</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+
+                @if (item.AprobadoPorInstructor)
+                {
+                    <td>Si</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+
+                <td>@item.InstructorNombre</td>
+
+
+                <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
+
+                        @if (item.PuntajeFinal > 70)
+                        {
+                            <td>Dominada</td>
+                        }
+
+                        @if (item.PuntajeFinal == 0)
+                        {
+                            <td>En Progreso</td>
+                        }
+                        @if (item.PuntajeFinal <= 70)
+                        {
+                            <td>Requiere Refuerzo</td>
+                        }
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<a href="@Url.Action("ListaParticipantes", "Participantes")"
+   class="btn btn-secondary w-100">
+    Ir participantes
+</a>

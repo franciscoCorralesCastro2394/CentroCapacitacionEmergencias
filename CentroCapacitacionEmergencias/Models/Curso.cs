@@ -26,5 +26,9 @@ namespace CentroCapacitacionEmergencias.Models
 
         // Relación con cohortes
         public virtual ICollection<Cohorte> Cohortes { get; set; }
+
+        //numero maximo de instructores por curso, se puede modificar si se desea permitir mas de 1 instructor por curso
+        public int? maxInstructores { get; set; } = 1;
+
     }
 }

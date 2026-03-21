@@ -22,8 +22,6 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-           
-
             if (!context.Roles.Any())
             {
                 context.Roles.Add(new Rol { Nombre = "Administrador" });
@@ -57,7 +55,35 @@
                     Activo = true
                 });
 
+                context.Usuarios.Add(new Usuario
+                {
+                    Nombre = "Instructor2",
+                    Apellido = "Sistema2",
+                    Correo = "Instructor2@centro.com",
+                    PasswordHash = ComputeSha256Hash("1234"),
+                    RolId = InstructorRole.Id,
+                    Activo = true
+                });
 
+                context.Usuarios.Add(new Usuario
+                {
+                    Nombre = "Instructor3",
+                    Apellido = "Sistema3",
+                    Correo = "Instructor3@centro.com",
+                    PasswordHash = ComputeSha256Hash("1234"),
+                    RolId = InstructorRole.Id,
+                    Activo = true
+                });
+
+                context.Usuarios.Add(new Usuario
+                {
+                    Nombre = "Instructor4",
+                    Apellido = "Sistema4",
+                    Correo = "Instructor4@centro.com",
+                    PasswordHash = ComputeSha256Hash("1234"),
+                    RolId = InstructorRole.Id,
+                    Activo = true
+                });
             }
 
             // Aquí podrías agregar datos de ejemplo para Participantes, Cohortes y Cursos si lo deseas

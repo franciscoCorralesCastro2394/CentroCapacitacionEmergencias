@@ -3,13 +3,19 @@
 
 
 
-@*@if (!ViewData.ModelState.IsValid)
-    {
-        <div class="alert alert-danger">
-            <strong>Por favor corrija los siguientes errores:</strong>
-            @Html.ValidationSummary(false)
-        </div>
-    }*@
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        <button class="btn btn-sm btn-outline-dark"
+                onclick="this.closest('.alert').remove()">
+            ✖
+        </button>
+    </div>
+}
+
+
+
 <h3>Asignar Curso y Cohorte</h3>
 <div class="card">
 
@@ -61,7 +67,7 @@
                     Asignar
                 </button>
 
-                <a href="@Url.Action("ListaParticipantes")" class="btn btn-secondary">
+                <a href="@Url.Action("ListaParticipantes","Participantes")" class="btn btn-secondary">
                     Cancelar
                 </a>
 

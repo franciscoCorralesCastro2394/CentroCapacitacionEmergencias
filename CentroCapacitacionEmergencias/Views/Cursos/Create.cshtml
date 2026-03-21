@@ -2,6 +2,16 @@
 
 @model CentroCapacitacionEmergencias.ViewModels.CursoViewModel
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        <button class="btn btn-sm btn-outline-dark"
+                onclick="this.closest('.alert').remove()">
+            ✖
+        </button>
+    </div>
+}
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -45,8 +55,21 @@ else
             @Html.TextBoxFor(m => m.HorasPracticas, new { @class = "form-control" })
         </div>
 
+        <div class="mb-3">
+            <label>Máximo de Instructores</label>
+            @Html.TextBoxFor(m => m.maxInstructores, new
+            {
+                @class = "form-control",
+                   type = "number",
+                   min = "1",
+                   max = "100",
+                   required = "required"
+               })
+        </div>
+
         @if (Model.Id == 0)
         {
+            <label>Seleccione uno o varios cursos (Ctrl + click)</label>
             <div class="mb-3">
                 <label>Instructores</label>
                 @Html.ListBoxFor(m => m.InstructoresSeleccionados, Model.Instructores, new { @class = "form-control" })

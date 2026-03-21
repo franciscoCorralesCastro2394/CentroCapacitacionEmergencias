@@ -37,12 +37,12 @@ else
 
         <div class="mb-3">
             <label>Fecha Inicio</label>
-            @Html.TextBoxFor(m => m.Cohorte.FechaInicio, new { @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cohorte.FechaInicio, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
         </div>
 
         <div class="mb-3">
             <label>Fecha Fin</label>
-            @Html.TextBoxFor(m => m.Cohorte.FechaFin, new { @type = "date", @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cohorte.FechaFin, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
         </div>
 
         @if (Model.Cohorte.Id != 0)

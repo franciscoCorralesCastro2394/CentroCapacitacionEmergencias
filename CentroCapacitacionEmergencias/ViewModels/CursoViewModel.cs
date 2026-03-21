@@ -16,6 +16,8 @@ namespace CentroCapacitacionEmergencias.ViewModels
 
         public int HorasPracticas { get; set; }
 
+        public int? maxInstructores { get; set; } = 1;
+
         public List<int> InstructoresSeleccionados { get; set; }
 
         public List<int> CohortesSeleccionadas { get; set; }

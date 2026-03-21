@@ -27,50 +27,55 @@ namespace CentroCapacitacionEmergencias.Controllers
         public ActionResult ListaParticipantes(ParticipanteViewModel participanteViewModel, int? detalleId, int? evaluacionId,int? CursoIdEvaluar)
         {
 
-            participanteViewModel.Cohortes = db.Cohortes
+            // Cargar las cohortes y cursos para los filtros en la vista de lista de participantes Sin archivar
+            participanteViewModel.Cohortes = db.Cohortes.Where(c => c.Archivado == true)
                                                 .Select(c => new SelectListItem
                                                 {
                                                     Value = c.Id.ToString(),
                                                     Text = c.Nombre
                                                 }).ToList();
 
-            participanteViewModel.Cursos = db.Cursos
+            // Cargar las cohortes y cursos para los filtros en la vista de lista de participantes Sin archivar
+            participanteViewModel.Cursos = db.Cursos.Where(c => c.Archivado == true)
                                               .Select(c => new SelectListItem
                                               {
                                                   Value = c.Id.ToString(),
                                                   Text = c.Titulo
                                               }).ToList();
 
-            
 
 
+            // Consulta base para obtener los participantes activos
             var query = db.Participantes
                         .Where(p => p.Estado);
 
+            // Aplicar filtros si se proporcionan en el modelo de vista
             if (!string.IsNullOrEmpty(participanteViewModel.filtroNombre))
             {
                 // Filtrar por nombre (búsqueda parcial)
                 query = query.Where(p => p.NombreCompleto.Contains(participanteViewModel.filtroNombre));
             }
 
-
+            // Filtrar por cédula (búsqueda parcial)
             if (!string.IsNullOrEmpty(participanteViewModel.filtroCedula))
             {
                 query = query.Where(p => p.Identificacion.Contains(participanteViewModel.filtroCedula));
 
             }
 
+            // Filtrar por cohorte
             if (participanteViewModel.filtroCohorteId != null)
             {
                 query = query.Where(p => db.ParticipanteCohortes.Any(
-                     pc => pc.ParticipanteId == p.Id && pc.CohorteID == participanteViewModel.filtroCohorteId
+                     pc => pc.ParticipanteId == p.Id && pc.CohorteID == participanteViewModel.filtroCohorteId && pc.Cohorte.Archivado == true
                     ));
             }
 
+            // Filtrar por curso
             if (participanteViewModel.filtroCursoId != null)
             {
                 query = query.Where(p => db.ParticipanteCursos.Any(
-                     pc => pc.ParticipanteId == p.Id && pc.CursoId == participanteViewModel.filtroCursoId
+                     pc => pc.ParticipanteId == p.Id && pc.CursoId == participanteViewModel.filtroCursoId && pc.Curso.Archivado == true
                     ));
             }
 
@@ -79,13 +84,13 @@ namespace CentroCapacitacionEmergencias.Controllers
             {
                 //obtiene los cursos de un participante
                 var cursos = db.ParticipanteCursos.
-                Where(pc => pc.ParticipanteId == participanteViewModel.detalleId).
+                Where(pc => pc.ParticipanteId == participanteViewModel.detalleId && pc.Curso.Archivado == true).
                 Select(pc => pc.Curso).
                 ToList();
 
                 //obtiene los cohortes de un participante
                 var cohortes = db.ParticipanteCohortes.
-                Where(pc => pc.ParticipanteId == detalleId).
+                Where(pc => pc.ParticipanteId == detalleId && pc.Cohorte.Archivado == true).
                 Select(pc => pc.Cohorte).
                 ToList();
 
@@ -98,12 +103,12 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             }
 
-            
+            // Si se proporciona un ID de evaluación, buscar el participante correspondiente y los cursos para evaluar
             if (evaluacionId != null)
             {
-                //obtiene los cursos en lso que se registro un estudiante paar evaluar
+                //obtiene los cursos en los que se registro un estudiante paar evaluar
                 var cursosSelectList = db.ParticipanteCursos
-                                .Where(pc => pc.ParticipanteId == evaluacionId)
+                                .Where(pc => pc.ParticipanteId == evaluacionId && pc.Curso.Archivado == true)
                                 .Select(pc => new SelectListItem
                                 {
                                     Value = pc.Curso.Id.ToString(),
@@ -135,6 +140,7 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             }
 
+            // Ejecutar la consulta y obtener la lista de participantes filtrada
             participanteViewModel.Participantes = query.ToList();
 
             return View(participanteViewModel);
@@ -212,11 +218,11 @@ namespace CentroCapacitacionEmergencias.Controllers
 
         public ActionResult Editar(int id)
         {
+            // Buscar el participante por su ID
             var participante = db.Participantes.Find(id);
 
             ParticipanteViewModel participanteViewModel = new ParticipanteViewModel
             {
-
                 Canton = participante.Canton,
                 ContactoEmergencia = participante.ContactoEmergencia,
                 Provincia = participante.Provincia,

@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CohortesController.cs" />
     <Compile Include="Controllers\CursosController.cs" />
+    <Compile Include="Controllers\EstadisticasPartController.cs" />
     <Compile Include="Controllers\EvaluacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ParticipantesController.cs" />
@@ -214,6 +215,10 @@
     <Compile Include="Migrations\202603192225393_actualizacionCohortesCursos.Designer.cs">
       <DependentUpon>202603192225393_actualizacionCohortesCursos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202603210422366_actualizacionCursos.cs" />
+    <Compile Include="Migrations\202603210422366_actualizacionCursos.Designer.cs">
+      <DependentUpon>202603210422366_actualizacionCursos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cohorte.cs" />
     <Compile Include="Models\Curso.cs" />
@@ -233,6 +238,7 @@
     <Compile Include="ViewModels\AsignarCursoCohorte.cs" />
     <Compile Include="ViewModels\CohorteViewModel.cs" />
     <Compile Include="ViewModels\CursoViewModel.cs" />
+    <Compile Include="ViewModels\EstadisticasViewModel.cs" />
     <Compile Include="ViewModels\EvaluacionViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ParticipanteViewModel.cs" />
@@ -298,6 +304,7 @@
     <Content Include="Views\Evaluacion\Evaluacion.cshtml" />
     <Content Include="Views\Cohortes\Lista.cshtml" />
     <Content Include="Views\Cursos\Lista.cshtml" />
+    <Content Include="Views\EstadisticasPart\EstadisticasPart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,6 +393,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202603192225393_actualizacionCohortesCursos.resx">
       <DependentUpon>202603192225393_actualizacionCohortesCursos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202603210422366_actualizacionCursos.resx">
+      <DependentUpon>202603210422366_actualizacionCursos.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

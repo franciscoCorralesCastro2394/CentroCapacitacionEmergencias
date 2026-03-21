@@ -76,9 +76,9 @@
             <th>Nombre</th>
             <th>Identificación</th>
             <th>Correo</th>
-            <th>Teléfono</th>
-            <th>Provincia</th>
             <th>Acciones</th>
+            @*<th>Provincia</th>
+            <th>Acciones</th>*@
         </tr>
     </thead>
 
@@ -91,50 +91,62 @@
                 <td>@item.NombreCompleto</td>
                 <td>@item.Identificacion</td>
                 <td>@item.Correo</td>
-                <td>@item.Telefono</td>
-                <td>@item.Provincia</td>
+                @*<td>@item.Telefono</td>
+                <td>@item.Provincia</td>*@
 
-                <td>
-                    @if (usuario != null && rol == "Instructor")
-                    {
+            <td>
+                @if (usuario != null && rol == "Instructor")
+                {
 
-                        <a href="@Url.Action("ListaParticipantes",new { evaluacionId = item.Id })"
-                           class="btn btn-sm btn-info">
-                            Evaluación
-                        </a>
+                    <a href="@Url.Action("ListaParticipantes",new { evaluacionId = item.Id })"
+                       class="btn btn-sm btn-info">
+                        Evaluación
+                    </a>
 
-                        <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
-                           class="btn btn-sm btn-info">
-                            Detalles
-                        </a>
+                    <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
+                       class="btn btn-sm btn-info">
+                        Detalles
+                    </a>
 
-                    }
-
-
-
-                    @if (usuario != null && rol == "Administrador")
-                    {
-                        <a href="@Url.Action("Asignar","Asignar", new { id = item.Id })"
-                           class="btn btn-sm btn-success">
-                            Añadir Cursos y Cohorte
-                        </a>
-
-                        <a href="@Url.Action("Editar","Participantes", new { id = item.Id })"
-                           class="btn btn-sm btn-warning">
-                            Editar
-                        </a>
+                    <a href="@Url.Action("EstadisticasPart","EstadisticasPart",new { id = item.Id })"
+                       class="btn btn-sm btn-info">
+                        Estadísticas
+                    </a>
+                }
 
 
-                        <a href="@Url.Action("Delete","Participantes", new { id = item.Id })"
-                           class="btn btn-sm btn-danger">
-                            Eliminar
-                        </a>
+
+                @if (usuario != null && rol == "Administrador")
+                {
+                    <a href="@Url.Action("Asignar","Asignar", new { id = item.Id })"
+                       class="btn btn-sm btn-success">
+                        Añadir
+                    </a>
+
+                    <a href="@Url.Action("Editar","Participantes", new { id = item.Id })"
+                       class="btn btn-sm btn-warning">
+                        Editar
+                    </a>
 
 
-                    }
+                    <a href="@Url.Action("Delete","Participantes", new { id = item.Id })"
+                       class="btn btn-sm btn-danger">
+                        Eliminar
+                    </a>
+
+                    <a href="@Url.Action("ListaParticipantes",new { detalleId = item.Id })"
+                       class="btn btn-sm btn-info">
+                        Detalles
+                    </a>
+
+                    <a href="@Url.Action("EstadisticasPart","EstadisticasPart",new { id = item.Id })"
+                       class="btn btn-sm btn-info">
+                        Estadísticas
+                    </a>
+                }
 
 
-                </td>
+            </td>
             </tr>
         }
 

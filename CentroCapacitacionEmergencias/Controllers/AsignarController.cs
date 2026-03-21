@@ -28,19 +28,21 @@ namespace CentroCapacitacionEmergencias.Controllers
             {
                 ParticipanteId = participante.Id,
                 NombreParticipante = participante.NombreCompleto,
-                Cursos = db.Cursos.Select(c => new SelectListItem
+                Cursos = db.Cursos.
+                Where(c => c.Archivado == true ).
+                Select(c => new SelectListItem
                 {
                     Value = c.Id.ToString(),
                     Text = c.Titulo
                 }),
-                Cohortes = db.Cohortes.Select(c => new SelectListItem
+                Cohortes = db.Cohortes.
+                Where(c => c.Archivado == true ).
+                Select(c => new SelectListItem
                 {
                     Value = c.Id.ToString(),
                     Text = c.Nombre
                 })
-
             };
-
         }
 
         public ActionResult Asignar(int id)
@@ -89,7 +91,7 @@ namespace CentroCapacitacionEmergencias.Controllers
             }
             else 
             {
-                ModelState.AddModelError("CohorteId", "Errores en los datos de entrada seleccione un curso");
+                //TempData["Error"] = "Errores en asignar Cursos";
                 return View(crearModelo(asignarCursoCohorte.ParticipanteId));
 
             }

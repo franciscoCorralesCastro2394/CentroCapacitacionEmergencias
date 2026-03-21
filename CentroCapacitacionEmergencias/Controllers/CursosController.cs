@@ -53,7 +53,8 @@ namespace CentroCapacitacionEmergencias.Controllers
                 {
                     Titulo = model.Titulo,
                     CodigoCurso = model.CodigoCurso,
-                    HorasPracticas = model.HorasPracticas
+                    HorasPracticas = model.HorasPracticas,
+                    maxInstructores = model.maxInstructores
                 };
 
                 // Asignar instructores y cohortes seleccionados
@@ -61,16 +62,46 @@ namespace CentroCapacitacionEmergencias.Controllers
                     .Where(u => model.InstructoresSeleccionados.Contains(u.Id))
                     .ToList();
 
-                curso.Cohortes = db.Cohortes
+                if (curso.Instructores.Count() > model.maxInstructores)
+                {
+                    TempData["Error"] = "No se puede crear un curso, máximo de instructores seleccionados";
+
+                    int idRol = db.Roles.FirstOrDefault(r => r.Nombre == "Instructor").Id;
+
+                    model.Instructores = db.Usuarios
+                        .Where(u => u.RolId == idRol)
+                        .Select(u => new SelectListItem
+                        {
+                            Value = u.Id.ToString(),
+                            Text = u.Nombre
+                        }).ToList();
+
+                    model.Cohortes = db.Cohortes
+                        .Select(c => new SelectListItem
+                        {
+                            Value = c.Id.ToString(),
+                            Text = c.Nombre
+                        }).ToList();
+
+
+                    return View(model);
+                }
+                else 
+                {
+
+                     curso.Cohortes = db.Cohortes
                     .Where(c => model.CohortesSeleccionadas.Contains(c.Id))
                     .ToList();
-                // Marcar el curso como archivado en True para que se muestre en la lista de cursos activos
-                curso.Archivado = true;
-                db.Cursos.Add(curso);
-                db.SaveChanges();
+                    // Marcar el curso como archivado en True para que se muestre en la lista de cursos activos
+                    curso.Archivado = true;
+                    db.Cursos.Add(curso);
+                    db.SaveChanges();
 
-                // Redirigir a la lista de cursos o a otra página relevante
-                return RedirectToAction("Lista");
+                    // Redirigir a la lista de cursos o a otra página relevante
+                    return RedirectToAction("Lista");
+                }
+
+
 
             }
 
@@ -153,5 +184,7 @@ namespace CentroCapacitacionEmergencias.Controllers
             return View("Lista",cursoViewModel);
 
         }
+
+        
     }
 }

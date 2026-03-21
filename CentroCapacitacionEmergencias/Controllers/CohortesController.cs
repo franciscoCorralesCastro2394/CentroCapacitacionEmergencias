@@ -62,7 +62,7 @@ namespace CentroCapacitacionEmergencias.Controllers
         {
 
             // Obtener todas las cohortes de la base de datos ademas cohortes que ya cerraron no son listados 
-            List<Cohorte> cohortes = db.Cohortes.Where(c => c.Archivado == true && c.FechaFin < DateTime.Now).ToList();
+            List<Cohorte> cohortes = db.Cohortes.Where(c => c.Archivado == true && c.FechaFin > DateTime.Now).ToList();
 
             CohorteViewModel cohorteViewModel = new CohorteViewModel();
             cohorteViewModel.Cohortes = cohortes;
@@ -74,7 +74,7 @@ namespace CentroCapacitacionEmergencias.Controllers
         public ActionResult ListaArchivados()
         {
             // Obtener todas las cohortes de la base de datos ademas cohortes que ya cerraron no son listados
-            List<Cohorte> cohortes = db.Cohortes.Where(c => c.Archivado == false && c.FechaFin < DateTime.Now).ToList();
+            List<Cohorte> cohortes = db.Cohortes.Where(c => c.Archivado == false && c.FechaFin >  DateTime.Now).ToList();
 
             CohorteViewModel cohorteViewModel = new CohorteViewModel();
             cohorteViewModel.Cohortes = cohortes;
@@ -134,7 +134,7 @@ namespace CentroCapacitacionEmergencias.Controllers
                 };
 
                 //Renvia a la vista de creación con los datos del cohorte para editar
-                return View("Create", cohorteViewModel.Cohorte);
+                return View("Create", cohorteViewModel);
 
             }
             else 
