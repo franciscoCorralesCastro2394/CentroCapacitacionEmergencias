@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@{
+    var EvaluacionesCohorte = ViewBag.EvaluacionCohortes;
+    var Cursos = ViewBag.Cursos;
+    var ParticipantesCurso = ViewBag.ParticipantesCurso;
+    var participantesCohorte = ViewBag.ParticipantesCohorte;
+    var TasaAprobacion = ViewBag.TasaAprobacion;
+    var Certificados = ViewBag.Certificados;
+    var Horas = ViewBag.Horas;
+}
+
+
+<h2>Como Instructor del Curso </h2>
+
+<h2>Evaluaciones </h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Participante</th>
+            <th>Curso</th>
+            <th>Destreza</th>
+            <th>TiempoRespuesta</th>
+            <th>Puntaje Final</th>
+            <th>Fallas Críticas</th>
+            <th>Aprobación</th>
+            <th>Instructor</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in EvaluacionesCohorte)
+        {
+            <tr>
+                <td>@item.ParticipanteId</td>
+                <td>@item.CursoId</td>
+                <td>@item.DestrezaId</td>
+                <td>@item.TiempoRespuesta</td>
+                <td>@item.PuntajeFinal</td>
+
+                @if (item.TieneFallaCritica)
+                {
+                    <td>Si</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+
+                @if (item.AprobadoPorInstructor)
+                {
+                    <td>Si</td>
+                }
+                else
+                {
+                    <td>No</td>
+                }
+
+                <td>@item.InstructorNombre</td>
+
+
+                <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
+
+                @if (item.PuntajeFinal > 70)
+                {
+                    <td>Dominada</td>
+                }
+
+                @if (item.PuntajeFinal == 0)
+                {
+                    <td>En Progreso</td>
+                }
+                @if (item.PuntajeFinal <= 70)
+                {
+                    <td>Requiere Refuerzo</td>
+                }
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<h2>Participantes por Curso </h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in ParticipantesCurso)
+        {
+            <tr>
+                <td>@item.Identificacion</td>
+                <td>@item.NombreCompleto</td>
+                <td>@item.Correo</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<h2>Participantes por Curso </h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in participantesCohorte)
+        {
+            <tr>
+                <td>@item.Identificacion</td>
+                <td>@item.NombreCompleto</td>
+                <td>@item.Correo</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Estadística Requerida</th>
+            <th>Criterio de Medición</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+        <tr>
+            <td>Tasa Global de Aprobación de Destrezas</td>
+            <td>@TasaAprobacion</td>
+
+        </tr>
+
+        <tr>
+            <td>Estado de Certificación</td>
+            <td>
+                @Certificados + " " + "Horas de Capacitación: " + @Horas
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>

@@ -79,6 +79,16 @@
 
         @if (usuario != null && rol == "Instructor")
         {
+
+
+            <div class="mb-3">
+                <a href="@Url.Action("Seleccion","Panel")"
+                   class="btn btn-sm btn-info">
+                    Evaluar Destreza
+                </a>
+            </div>
+
+
             <div class="mb-3">
                 <a href="@Url.Action("ListaParticipantes", "Participantes")"
                    class="btn btn-primary w-100">
