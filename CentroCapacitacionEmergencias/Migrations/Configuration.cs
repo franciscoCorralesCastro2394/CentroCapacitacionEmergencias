@@ -216,6 +216,13 @@
                     CohorteId = 1
                 });
 
+                context.ParticipanteCursos.Add(new ParticipanteCurso
+                {
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    CohorteId = 1
+                });
+
             }
 
             if (!context.ParticipanteCohortes.Any())
@@ -280,6 +287,130 @@
                 context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 4, IdPunto = 1 });
                 context.PuntoControlDestreza.Add(new PuntoControlDestreza { IdDestreza = 5, IdPunto = 1 });
             }
+
+            if (!context.EvaluacionDestreza.Any())
+            {
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 1,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 85,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = false,
+                    AprobadoPorInstructor = true,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 2,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 95,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = true,
+                    AprobadoPorInstructor = false,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 3,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 60,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = false,
+                    AprobadoPorInstructor = false,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                    
+                });
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 4,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 60,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = false,
+                    AprobadoPorInstructor = false,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 5,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 60,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = false,
+                    AprobadoPorInstructor = false,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 5,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 100,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = true,
+                    AprobadoPorInstructor = true,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 1,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 100,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = true,
+                    AprobadoPorInstructor = true,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+
+                context.EvaluacionDestreza.Add(new EvaluacionDestreza
+                {
+
+                    ParticipanteId = 1,
+                    CursoId = 7,
+                    DestrezaId = 10,
+                    TiempoRespuesta = 3550,
+                    PuntajeFinal = 100,
+                    FechaRegistro = DateTime.Now,
+                    TieneFallaCritica = true,
+                    AprobadoPorInstructor = true,
+                    InstructorNombre = "Instructor Sistema",
+                    InstructorId = 2
+                });
+            }
+
 
             context.SaveChanges();
         }

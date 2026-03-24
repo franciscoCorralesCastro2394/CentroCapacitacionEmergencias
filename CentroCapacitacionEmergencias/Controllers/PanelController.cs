@@ -33,29 +33,31 @@ namespace CentroCapacitacionEmergencias.Controllers
             var cohorte = db.Cohortes.Where(c => c.Id == idCohorte).ToList();
             ViewBag.Cohorte = cohorte;
 
-
+            // Participantes 
             List<Participante> participantesporCurso = db.ParticipanteCursos.Where(pc => pc.CursoId == idCurso)
                                         .Select(pc => pc.Participante)
                                         .ToList();
 
             ViewBag.ParticipantesCurso = participantesporCurso;
-
+            // Participantes Cohorte
             List<Participante> participantesCohorte = db.ParticipanteCohortes.Where(pc => pc.CohorteID == idCohorte)
                                         .Select(pc => pc.Participante)
                                         .ToList();
             ViewBag.ParticipantesCohorte = participantesCohorte;
 
-
+            // Evaluaciones 
             int evaluacionesTotales = evaluacionCohortes.Count();
             ViewBag.EvaluacionesTotales = evaluacionesTotales;
 
+            
             int putajeMinimo = 70; // Ejemplo de puntaje mínimo para aprobar
             ViewBag.PuntajeMinimo = putajeMinimo;
 
+            // Evaluaciones aprobadas
             var aprobadas = evaluacionCohortes.Where(e => e.PuntajeFinal >= putajeMinimo).ToList();
             ViewBag.Aprobadas = aprobadas;
 
-
+            // Tasa de aprobación
             double tasa = evaluacionesTotales > 0 ? (double)aprobadas.Count() / evaluacionesTotales * 100 : 0;
             ViewBag.TasaAprobacion = tasa;
             ///
@@ -64,18 +66,43 @@ namespace CentroCapacitacionEmergencias.Controllers
             ViewBag.Certificados = certificados;
 
             int horas = 0;
-            ViewBag.Horas = horas;
 
-            foreach (var item in aprobadas)
+            // Horas prácticas
+            foreach (var item in evaluacionCohortes)
             {
-                var cursoAprobado = db.Cursos.FirstOrDefault(c => c.Id == item.CursoId);
-                if (cursoAprobado != null)
+                var curso = db.Cursos.FirstOrDefault(c => c.Id == item.CursoId);
+                if (curso != null)
                 {
-                    horas += cursoAprobado.HorasPracticas;
+                    horas += curso.HorasPracticas;
                 }
             }
 
+            ViewBag.Horas = horas;
 
+
+            // Destrezas 
+            List<Destreza>  destrezas = new List<Destreza>();
+            List<PuntoControl> puntos = new List<PuntoControl>();
+            foreach (var item in evaluacionCohortes)
+            {
+                var deztreza = db.Destrezas.FirstOrDefault(d => d.Id == item.DestrezaId);
+                if (deztreza != null)
+                {
+                    destrezas.Add(deztreza);
+                    PuntoControlDestreza puntoControlDestreza = db.PuntoControlDestreza.
+                        FirstOrDefault(pcd => pcd.IdDestreza == deztreza.Id);
+                    if (puntoControlDestreza != null) {
+
+                        if (!puntos.Contains(db.PuntoControls.Find(puntoControlDestreza.IdPunto)))
+                        {
+                            puntos.Add(db.PuntoControls.Find(puntoControlDestreza.IdPunto));
+                        }
+
+                    }
+                }
+            }
+            ViewBag.Destrezas = destrezas;
+            ViewBag.Puntos = puntos;
 
             return View();
         }

@@ -11,6 +11,8 @@
     var TasaAprobacion = ViewBag.TasaAprobacion;
     var Certificados = ViewBag.Certificados;
     var Horas = ViewBag.Horas;
+    var Destrezas = ViewBag.Destrezas;
+    var Puntos = ViewBag.Puntos;
 }
 
 
@@ -45,24 +47,24 @@
                 <td>@item.CursoId</td>
                 <td>@item.DestrezaId</td>
                 <td>@item.TiempoRespuesta</td>
-                <td>@item.PuntajeFinal</td>
+                <td class="@(item.PuntajeFinal < 70 ? "bg-danger" : "bg-success")">@item.PuntajeFinal</td>
 
                 @if (item.TieneFallaCritica)
                 {
-                    <td>Si</td>
+                    <td class="bg-danger">Si</td>
                 }
                 else
                 {
-                    <td>No</td>
+                    <td class="bg-success">No</td>
                 }
 
                 @if (item.AprobadoPorInstructor)
                 {
-                    <td>Si</td>
+                    <td class="bg-success">Si</td>
                 }
                 else
                 {
-                    <td>No</td>
+                    <td class="bg-danger">No</td>
                 }
 
                 <td>@item.InstructorNombre</td>
@@ -72,7 +74,7 @@
 
                 @if (item.PuntajeFinal > 70)
                 {
-                    <td>Dominada</td>
+                    <td class="bg-success">Dominada</td>
                 }
 
                 @if (item.PuntajeFinal == 0)
@@ -81,7 +83,7 @@
                 }
                 @if (item.PuntajeFinal <= 70)
                 {
-                    <td>Requiere Refuerzo</td>
+                    <td class="bg-warning">Requiere Refuerzo</td>
                 }
 
             </tr>
@@ -117,7 +119,7 @@
 
 </table>
 
-<h2>Participantes por Curso </h2>
+<h2>Participantes por Cohorte </h2>
 
 <table class="table table-striped table-bordered w-100">
 
@@ -144,6 +146,7 @@
 
 </table>
 
+<h2>Panel de estadisticas </h2>
 
 <table class="table table-striped table-bordered w-100">
 
@@ -160,18 +163,65 @@
 
         <tr>
             <td>Tasa Global de Aprobación de Destrezas</td>
-            <td>@TasaAprobacion</td>
-
+            <td class=@(TasaAprobacion < 70 ? "bg-danger" : "bg-success")>@TasaAprobacion</td>
         </tr>
 
         <tr>
             <td>Estado de Certificación</td>
             <td>
-                @Certificados + " " + "Horas de Capacitación: " + @Horas
+                @(Certificados + " Horas de Capacitación: " + Horas)
             </td>
 
         </tr>
 
+    </tbody>
+
+</table>
+
+<h2>Panel de Destrezas </h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Destrezas)
+        {
+            <tr>
+                <td>@item.Titulo</td>
+                <td>@item.Descripcion</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<h2>Puntos de Control Evaluados </h2>
+
+<table class="table table-striped table-bordered w-100">
+
+
+    <thead class="table-dark ">
+        <tr>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Puntos)
+        {
+            <tr>
+                <td>@item.Descripcion</td>
+            </tr>
+        }
     </tbody>
 
 </table>
