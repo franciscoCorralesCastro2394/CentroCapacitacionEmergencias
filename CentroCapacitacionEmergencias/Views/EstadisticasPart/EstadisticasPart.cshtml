@@ -46,24 +46,24 @@
                 <td>@item.Curso</td>
                 <td>@item.Destreza</td>
                 <td>@item.TiempoRespuesta</td>
-                <td>@item.PuntajeFinal</td>
+                <td class="@(item.PuntajeFinal < 70 ? "bg-danger" : "bg-success")">@item.PuntajeFinal</td>
 
-                @if (item.TieneFallaCritica)
+                @if (item.AprobadoPorInstructor)
                 {
-                    <td>Si</td>
+                    <td class="bg-success">Si</td>
                 }
                 else
                 {
-                    <td>No</td>
+                    <td class="bg-danger">No</td>
                 }
 
                 @if (item.AprobadoPorInstructor)
                 {
-                    <td>Si</td>
+                    <td class="bg-success">Si</td>
                 }
                 else
                 {
-                    <td>No</td>
+                    <td class="bg-danger">No</td>
                 }
 
                 <td>@item.InstructorNombre</td>
@@ -71,19 +71,19 @@
 
                 <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
 
-                        @if (item.PuntajeFinal > 70)
-                        {
-                            <td>Dominada</td>
-                        }
+                @if (item.PuntajeFinal > 70)
+                {
+                    <td class="bg-success">Dominada</td>
+                }
 
-                        @if (item.PuntajeFinal == 0)
-                        {
-                            <td>En Progreso</td>
-                        }
-                        @if (item.PuntajeFinal <= 70)
-                        {
-                            <td>Requiere Refuerzo</td>
-                        }
+                @if (item.PuntajeFinal == 0)
+                {
+                    <td>En Progreso</td>
+                }
+                @if (item.PuntajeFinal <= 70)
+                {
+                    <td class="bg-warning">Requiere Refuerzo</td>
+                }
 
             </tr>
         }

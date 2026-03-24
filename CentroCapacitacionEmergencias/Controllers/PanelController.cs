@@ -112,7 +112,8 @@ namespace CentroCapacitacionEmergencias.Controllers
 
             int intructorId = (int)Session["UserId"];
 
-            List<Curso> cursosinstructor = db.Cursos.Where(c => c.Instructores.Any(i => i.Id == intructorId)).ToList();
+            List<Curso> cursosinstructor = db.Cursos.ToList();
+            List<Cohorte> cohortesIntructor = db.Cohortes.ToList();
 
 
             // Obtener los cursos asociados al instructor
@@ -121,15 +122,22 @@ namespace CentroCapacitacionEmergencias.Controllers
                                        Text = c.Titulo
                                        }).ToList();
 
+            //// Obtener las cohortes asociadas a los cursos del instructor
+            //var cohortes = cursosinstructor.SelectMany(c => c.Cohortes).
+            //                                Select(co => new SelectListItem
+            //                                {
+            //                                    Value = co.Id.ToString(),
+            //                                    Text = co.Nombre
+
+            //                                }).ToList();
             // Obtener las cohortes asociadas a los cursos del instructor
-            var cohortes = cursosinstructor.SelectMany(c => c.Cohortes).
+            var cohortes = cohortesIntructor.
                                             Select(co => new SelectListItem
                                             {
                                                 Value = co.Id.ToString(),
                                                 Text = co.Nombre
 
                                             }).ToList();
-
 
 
 
